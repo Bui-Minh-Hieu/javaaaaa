@@ -1,0 +1,84 @@
+package Model;
+
+import java.time.LocalDateTime;
+
+public class BinhLuan {
+    private int maBinhLuan; // Comment ID
+    private int maTinTuc;   // News ID (foreign key to TinTuc)
+    private int userID;     // User ID (foreign key to Users)
+    private String fullName; // Commenter's full name (fetched from Users table)
+    private String noiDung;  // Comment content
+    private LocalDateTime ngayBinhLuan; // Comment date and time
+
+    // Constructor
+    public BinhLuan(int maBinhLuan, int maTinTuc, int userID, String fullName, String noiDung, LocalDateTime ngayBinhLuan) {
+        this.maBinhLuan = maBinhLuan;
+        this.maTinTuc = maTinTuc;
+        this.userID = userID;
+        this.fullName = fullName;
+        this.noiDung = noiDung;
+        this.ngayBinhLuan = ngayBinhLuan;
+    }
+
+    // Getters and Setters
+    public int getMaBinhLuan() {
+        return maBinhLuan;
+    }
+
+    public void setMaBinhLuan(int maBinhLuan) {
+        this.maBinhLuan = maBinhLuan;
+    }
+
+    public int getMaTinTuc() {
+        return maTinTuc;
+    }
+
+    public void setMaTinTuc(int maTinTuc) {
+        this.maTinTuc = maTinTuc;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getNoiDung() {
+        return noiDung;
+    }
+
+    public void setNoiDung(String noiDung) {
+        this.noiDung = noiDung;
+    }
+
+    public LocalDateTime getNgayBinhLuan() {
+        return ngayBinhLuan;
+    }
+
+    public void setNgayBinhLuan(LocalDateTime ngayBinhLuan) {
+        this.ngayBinhLuan = ngayBinhLuan;
+    }
+
+    // toString method for debugging
+    @Override
+    public String toString() {
+        return "BinhLuan{" +
+                "maBinhLuan=" + maBinhLuan +
+                ", maTinTuc=" + maTinTuc +
+                ", userID=" + userID +
+                ", fullName='" + fullName + '\'' +
+                ", noiDung='" + noiDung + '\'' +
+                ", ngayBinhLuan=" + ngayBinhLuan +
+                '}';
+    }
+}

@@ -1,0 +1,94 @@
+package Model;
+
+import java.sql.Timestamp;
+
+public class BinhLuan {
+    private int maBinhLuan; // Comment ID
+    private int maTinTuc;   // News ID (foreign key to TinTuc)
+    private int userID;     // User ID (foreign key to Users)
+    private String fullName; // Commenter's full name
+    private String noiDung;  // Comment content
+    private Timestamp ngayBinhLuan; // Comment date and time
+    private String tieuDe;   // Title of the news article
+
+    // Constructor
+    public BinhLuan(int maBinhLuan, int maTinTuc, int userID, String fullName, String noiDung, Timestamp ngayBinhLuan, String tieuDe) {
+        this.maBinhLuan = maBinhLuan;
+        this.maTinTuc = maTinTuc;
+        this.userID = userID;
+        this.fullName = fullName;
+        this.noiDung = noiDung;
+        this.ngayBinhLuan = ngayBinhLuan;
+        this.tieuDe = tieuDe;
+    }
+
+    // Getters and Setters
+    public int getMaBinhLuan() {
+        return maBinhLuan;
+    }
+
+    public void setMaBinhLuan(int maBinhLuan) {
+        this.maBinhLuan = maBinhLuan;
+    }
+
+    public int getMaTinTuc() {
+        return maTinTuc;
+    }
+
+    public void setMaTinTuc(int maTinTuc) {
+        this.maTinTuc = maTinTuc;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getNoiDung() {
+        return noiDung;
+    }
+
+    public void setNoiDung(String noiDung) {
+        this.noiDung = noiDung;
+    }
+
+    public Timestamp getNgayBinhLuan() {
+        return ngayBinhLuan;
+    }
+
+    public void setNgayBinhLuan(Timestamp ngayBinhLuan) {
+        this.ngayBinhLuan = ngayBinhLuan;
+    }
+
+    public String getTieuDe() {
+        return tieuDe;
+    }
+
+    public void setTieuDe(String tieuDe) {
+        this.tieuDe = tieuDe;
+    }
+
+    @Override
+    public String toString() {
+        return "BinhLuan{" +
+                "maBinhLuan=" + maBinhLuan +
+                ", maTinTuc=" + maTinTuc +
+                ", userID=" + userID +
+                ", fullName='" + fullName + '\'' +
+                ", noiDung='" + noiDung + '\'' +
+                ", ngayBinhLuan=" + ngayBinhLuan +
+                ", tieuDe='" + tieuDe + '\'' +
+                '}';
+    }
+}

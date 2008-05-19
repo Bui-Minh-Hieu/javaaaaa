@@ -1,0 +1,76 @@
+package java.vn.dao;
+
+import java.vn.connection.DatabaseConnection;
+import java.vn.model.TinTuc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TinTucDAO {
+    public List<TinTuc> getTopNewsByCategory(int maTheLoai, int limit) throws SQLException {
+        List<TinTuc> newsList = new ArrayList<>();
+        String sql = "SELECT TOP ? MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag " +
+                     "FROM TinTuc WHERE MaTheLoai = ? ORDER BY NgayCapNhat DESC";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, limit);
+            stmt.setInt(2, maTheLoai);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TinTuc news = new TinTuc();
+                news.setMaTinTuc(rs.getInt("MaTinTuc"));
+                news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                news.setTrichDanTin(rs.getString("TrichDanTin"));
+                Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    news.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                news.setUrlAnh(rs.getString("UrlAnh"));
+                news.setSoLanDoc(rs.getInt("SoLanDoc"));
+                news.setTag(rs.getString("Tag"));
+                newsList.add(news);
+            }
+        }
+        return newsList;
+    }
+
+    public TinTuc getNewsById(int maTinTuc) throws SQLException {
+        String sql = "SELECT MaTinTuc, TieuDeTinTuc, NoiDungTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag " +
+                     "FROM TinTuc WHERE MaTinTuc = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, maTinTuc);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                TinTuc news = new TinTuc();
+                news.setMaTinTuc(rs.getInt("MaTinTuc"));
+                news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                news.setNoiDungTin(rs.getString("NoiDungTin"));
+                Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    news.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                news.setUrlAnh(rs.getString("UrlAnh"));
+                news.setSoLanDoc(rs.getInt("SoLanDoc"));
+                news.setTag(rs.getString("Tag"));
+                return news;
+            }
+        }
+        return null;
+    }
+
+    public void incrementViewCount(int maTinTuc) throws SQLException {
+        String sql = "UPDATE TinTuc SET SoLanDoc = SoLanDoc + 1 WHERE MaTinTuc = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, maTinTuc);
+            stmt.executeUpdate();
+        }
+    }
+}

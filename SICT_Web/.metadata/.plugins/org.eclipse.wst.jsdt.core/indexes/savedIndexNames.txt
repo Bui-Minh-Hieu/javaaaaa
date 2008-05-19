@@ -1,0 +1,11 @@
+INDEX VERSION 1.4+D:\Uni\Java\SICT_Web\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1657330681.index
+3243006.index
+1636365503.index
+62128543.index
+2870777686.index
+4264360528.index
+2107755485.index
+3968026643.index
+3259835185.index
+1749743435.index

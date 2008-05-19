@@ -1,0 +1,225 @@
+package Dal;
+
+import Model.PhanLoaiTin;
+import Model.TheLoai;
+import Model.TheLoaiTin;
+import Model.TinTuc;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TheLoaiDAO extends DBConnect {
+
+    public List<TheLoai> getAllTheLoai() {
+        List<TheLoai> list = new ArrayList<>();
+        String sql = "SELECT * FROM TheLoai";
+        try (PreparedStatement st = c.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new TheLoai(
+                    rs.getInt("maTheLoai"),
+                    rs.getString("tenTheLoai"),
+                    rs.getBoolean("visibleTheLoai"),
+                    rs.getBoolean("visibleTheLoai1"),
+                    rs.getInt("sapXep"),
+                    rs.getString("url"),
+                    rs.getString("target"),
+                    rs.getBoolean("linkNgoai")
+                ));
+            }
+            System.out.println("Fetched " + list.size() + " categories");
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return list;
+    }
+
+    public List<TheLoaiTin> getAllTheLoaiTin() {
+        List<TheLoaiTin> list = new ArrayList<>();
+        String sql = "SELECT * FROM TheLoaiTin";
+        try (PreparedStatement st = c.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new TheLoaiTin(
+                    rs.getInt("maTheLoaiTin"),
+                    rs.getString("tenTheLoaiTin"),
+                    rs.getBoolean("visibleTheLoaiTin"),
+                    rs.getBoolean("visibleTheLoaiTin1"),
+                    rs.getInt("sapXep"),
+                    rs.getString("url"),
+                    rs.getString("target"),
+                    rs.getBoolean("linkNgoai"),
+                    rs.getInt("maTheLoai")
+                ));
+            }
+            System.out.println("Fetched " + list.size() + " subcategories");
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return list;
+    }
+
+    public int getNextMaTheLoaiTin() {
+        String sql = "SELECT MAX(MaTheLoaiTin) FROM TheLoaiTin";
+        try (PreparedStatement st = c.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) + 1;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting next MaTheLoaiTin: " + e.getMessage());
+        }
+        return 1;
+    }
+
+    public void addTheLoaiTin(TheLoaiTin theLoaiTin) {
+        if (!checkForeignKey("TheLoai", "MaTheLoai", theLoaiTin.getMaTheLoai())) {
+            throw new IllegalArgumentException("MaTheLoai không tồn tại");
+        }
+
+        String sql = "INSERT INTO TheLoaiTin (MaTheLoaiTin, TenTheLoaiTin, VisibleTheLoaiTin, VisibleTheLoaiTin1, " +
+                     "SapXep, Url, Target, LinkNgoai, MaTheLoai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement st = getConnection().prepareStatement(sql)) {
+            st.setInt(1, theLoaiTin.getMaTheLoaiTin());
+            st.setString(2, theLoaiTin.getTenTheLoaiTin());
+            st.setBoolean(3, theLoaiTin.isVisibleTheLoaiTin());
+            st.setBoolean(4, theLoaiTin.isVisibleTheLoaiTin1());
+            st.setInt(5, theLoaiTin.getSapXep());
+            st.setString(6, theLoaiTin.getUrl());
+            st.setString(7, theLoaiTin.getTarget());
+            st.setBoolean(8, theLoaiTin.isLinkNgoai());
+            st.setInt(9, theLoaiTin.getMaTheLoai());
+
+            int rows = st.executeUpdate();
+            System.out.println("Thêm thành công TheLoaiTin, Rows affected: " + rows);
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi thêm TheLoaiTin: " + e.getMessage());
+            throw new RuntimeException("Không thể thêm TheLoaiTin: " + e.getMessage());
+        }
+    }
+
+    public void editTheLoaiTin(TheLoaiTin theLoaiTin) {
+        if (!checkForeignKey("TheLoaiTin", "MaTheLoaiTin", theLoaiTin.getMaTheLoaiTin())) {
+            throw new IllegalArgumentException("MaTheLoaiTin không tồn tại");
+        }
+        if (!checkForeignKey("TheLoai", "MaTheLoai", theLoaiTin.getMaTheLoai())) {
+            throw new IllegalArgumentException("MaTheLoai không tồn tại");
+        }
+
+        String sql = "UPDATE TheLoaiTin SET TenTheLoaiTin = ?, VisibleTheLoaiTin = ?, VisibleTheLoaiTin1 = ?, " +
+                     "SapXep = ?, Url = ?, Target = ?, LinkNgoai = ?, MaTheLoai = ? WHERE MaTheLoaiTin = ?";
+        try (PreparedStatement st = getConnection().prepareStatement(sql)) {
+            st.setString(1, theLoaiTin.getTenTheLoaiTin());
+            st.setBoolean(2, theLoaiTin.isVisibleTheLoaiTin());
+            st.setBoolean(3, theLoaiTin.isVisibleTheLoaiTin1());
+            st.setInt(4, theLoaiTin.getSapXep());
+            st.setString(5, theLoaiTin.getUrl());
+            st.setString(6, theLoaiTin.getTarget());
+            st.setBoolean(7, theLoaiTin.isLinkNgoai());
+            st.setInt(8, theLoaiTin.getMaTheLoai());
+            st.setInt(9, theLoaiTin.getMaTheLoaiTin());
+
+            int rows = st.executeUpdate();
+            System.out.println("Cập nhật thành công TheLoaiTin ID: " + theLoaiTin.getMaTheLoaiTin() + ", Rows affected: " + rows);
+            if (rows == 0) {
+                throw new RuntimeException("Không tìm thấy TheLoaiTin với ID: " + theLoaiTin.getMaTheLoaiTin());
+            }
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi cập nhật TheLoaiTin: " + e.getMessage());
+            throw new RuntimeException("Không thể cập nhật TheLoaiTin: " + e.getMessage());
+        }
+    }
+
+    public void deleteTheLoaiTin(String id) {
+        String sql = "DELETE FROM TheLoaiTin WHERE MaTheLoaiTin = ?";
+        try (PreparedStatement st = getConnection().prepareStatement(sql)) {
+            st.setInt(1, Integer.parseInt(id));
+            int rowsAffected = st.executeUpdate();
+            System.out.println("Deleted TheLoaiTin ID: " + id + ", Rows affected: " + rowsAffected);
+        } catch (SQLException e) {
+            System.err.println("Error deleting TheLoaiTin: " + e.getMessage());
+            throw new RuntimeException("Failed to delete TheLoaiTin: " + e.getMessage());
+        }
+    }
+
+    private boolean checkForeignKey(String table, String column, int value) {
+        String sql = "SELECT COUNT(*) FROM " + table + " WHERE " + column + " = ?";
+        try (PreparedStatement st = getConnection().prepareStatement(sql)) {
+            st.setInt(1, value);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error checking foreign key: " + e.getMessage());
+        }
+        return false;
+    }
+    
+	public int getTotalCategoryCount() {
+		String sql = "SELECT COUNT(*) FROM TheLoaiTin";
+		try (PreparedStatement st = getConnection().prepareStatement(sql)) {
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.err.println("Database error in getTotalNewsCount: " + e.getMessage());
+		}
+		return 0;
+	}
+
+    public static void main(String[] args) {
+        TheLoaiDAO dao = new TheLoaiDAO();
+        List<TheLoai> list = dao.getAllTheLoai();
+        for (TheLoai tl : list) {
+            System.out.println(tl);
+        }
+        System.out.println("TheLoai ID by news ID 1: " + dao.getTheLoaiByNewsID(1));
+    }
+
+    public int getTheLoaiByNewsID(int nID) {
+        String sql = "SELECT maTheLoai FROM TinTuc WHERE maTinTuc = ?";
+        try (PreparedStatement st = c.prepareStatement(sql)) {
+            st.setInt(1, nID);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return -1;
+    }
+
+    public List<PhanLoaiTin> getAllPhanLoaiTin() {
+        List<PhanLoaiTin> list = new ArrayList<>();
+        String sql = "SELECT * FROM PhanLoaiTin";
+        try (PreparedStatement st = c.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new PhanLoaiTin(
+                    rs.getInt("maPhanLoaiTin"),
+                    rs.getString("tenPhanLoaiTin"),
+                    rs.getInt("sapXep")
+                ));
+            }
+            System.out.println("Fetched " + list.size() + " classifications");
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return list;
+    }
+    
+	public static void main1(String[] args) {
+		TheLoaiDAO nDB = new TheLoaiDAO();
+		List<TheLoai> list = nDB.getAllTheLoai();
+		for (TheLoai news : list) {
+			System.out.println(news.toString());
+		}
+		System.out.println(nDB.getAllTheLoai());
+	}
+}

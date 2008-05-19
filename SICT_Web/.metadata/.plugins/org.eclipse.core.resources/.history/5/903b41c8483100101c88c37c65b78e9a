@@ -1,0 +1,115 @@
+// File: src/main/java/vn/Servlet/HomeServlet.java
+package java.vn.Servlet;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.vn.connection.DatabaseConnection;
+import java.vn.model.TinTuc;
+
+@WebServlet("/trang-chu")
+public class HomeServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        List<TinTuc> newsList = new ArrayList<>();
+        List<TinTuc> clubList = new ArrayList<>();
+        List<TinTuc> studentList = new ArrayList<>();
+        List<TinTuc> notificationList = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            // Tin tức
+            String newsSql = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTheLoai = 10 ORDER BY NgayCapNhat DESC";
+            PreparedStatement stmt = conn.prepareStatement(newsSql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TinTuc news = new TinTuc();
+                news.setMaTinTuc(rs.getInt("MaTinTuc"));
+                news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                news.setTrichDanTin(rs.getString("TrichDanTin"));
+                Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    news.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                news.setUrlAnh(rs.getString("UrlAnh"));
+                newsList.add(news);
+            }
+
+            // Câu lạc bộ
+            String clubSql = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTheLoai = 15 ORDER BY NgayCapNhat DESC";
+            stmt = conn.prepareStatement(clubSql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                TinTuc club = new TinTuc();
+                club.setMaTinTuc(rs.getInt("MaTinTuc"));
+                club.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                club.setTrichDanTin(rs.getString("TrichDanTin"));
+                Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    club.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                club.setUrlAnh(rs.getString("UrlAnh"));
+                clubList.add(club);
+            }
+
+            // Gương sáng sinh viên
+            String studentSql = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTheLoai = 16 ORDER BY NgayCapNhat DESC";
+            stmt = conn.prepareStatement(studentSql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                TinTuc student = new TinTuc();
+                student.setMaTinTuc(rs.getInt("MaTinTuc"));
+                student.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                student.setTrichDanTin(rs.getString("TrichDanTin"));
+                Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    student.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                student.setUrlAnh(rs.getString("UrlAnh"));
+                studentList.add(student);
+            }
+
+            // Thông báo
+            String notificationSql = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc FROM TinTuc WHERE MaTheLoai = 11 ORDER BY NgayCapNhat DESC";
+            stmt = conn.prepareStatement(notificationSql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                TinTuc notification = new TinTuc();
+                notification.setMaTinTuc(rs.getInt("MaTinTuc"));
+                notification.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                notificationList.add(notification);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
+        }
+
+        request.setAttribute("newsList", newsList);
+        request.setAttribute("clubList", clubList);
+        request.setAttribute("studentList", studentList);
+        request.setAttribute("notificationList", notificationList);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+}

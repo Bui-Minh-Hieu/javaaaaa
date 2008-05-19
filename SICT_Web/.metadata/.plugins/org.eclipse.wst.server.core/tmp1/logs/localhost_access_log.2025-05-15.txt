@@ -1,0 +1,11 @@
+127.0.0.1 - - [15/May/2025:13:44:25 +0700] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:44:27 +0700] "GET /SICT_Web/assets/fonts/themify-icons/themify-icons.css HTTP/1.1" 404 821
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:44:27 +0700] "GET /SICT_Web/ HTTP/1.1" 200 23379
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:44:31 +0700] "GET /SICT_Web/XemTinTuc.jsp?matintuc=2 HTTP/1.1" 200 16620
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:44:31 +0700] "GET /SICT_Web/assets/fonts/themify-icons/themify-icons.css HTTP/1.1" 404 821
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:44:53 +0700] "GET /SICT_Web/XemTinTuc.jsp?matintuc=2 HTTP/1.1" 200 16620
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:44:53 +0700] "GET /SICT_Web/assets/fonts/themify-icons/themify-icons.css HTTP/1.1" 404 821
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:45:06 +0700] "GET /SICT_Web/XemGuongSangSV.jsp?maguongsang=3 HTTP/1.1" 200 15605
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:45:06 +0700] "GET /SICT_Web/assets/fonts/themify-icons/themify-icons.css HTTP/1.1" 404 821
+127.0.0.1 - - [15/May/2025:13:53:58 +0700] "GET / HTTP/1.1" 404 752
+0:0:0:0:0:0:0:1 - - [15/May/2025:13:53:58 +0700] "GET /SICT_Website/ HTTP/1.1" 404 769

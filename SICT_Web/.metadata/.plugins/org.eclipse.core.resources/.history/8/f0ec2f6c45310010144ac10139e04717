@@ -1,0 +1,8 @@
+<servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>vn.Servlet.TestServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/Test/*</url-pattern>
+</servlet-mapping>

@@ -1,0 +1,77 @@
+package Controller;
+
+import Dal.TheLoaiDAO;
+import Model.TheLoaiTin;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+
+public class CategoryController extends HttpServlet {
+    private TheLoaiDAO theLoaiDAO;
+
+    @Override
+    public void init() {
+        theLoaiDAO = new TheLoaiDAO();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String path = request.getServletPath();
+        switch (path) {
+            case "/manage-categories":
+                List<TheLoaiTin> listTheLoaiTin = theLoaiDAO.getAllTheLoaiTin();
+                request.setAttribute("listTheLoaiTin", listTheLoaiTin);
+                request.getRequestDispatcher("/ManagerCategory.jsp").forward(request, response);
+                break;
+            case "/delete-category-tin":
+                String id = request.getParameter("id");
+                theLoaiDAO.deleteTheLoaiTin(id);
+                response.sendRedirect("manage-categories");
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String path = request.getServletPath();
+        switch (path) {
+            case "/add-category-tin":
+                TheLoaiTin newCategory = new TheLoaiTin();
+                newCategory.setMaTheLoaiTin(theLoaiDAO.getNextMaTheLoaiTin());
+                newCategory.setTenTheLoaiTin(request.getParameter("name"));
+                newCategory.setVisibleTheLoaiTin("1".equals(request.getParameter("visibleMenu")));
+                newCategory.setVisibleTheLoaiTin1("1".equals(request.getParameter("visibleGroup")));
+                newCategory.setSapXep(Integer.parseInt(request.getParameter("sort")));
+                newCategory.setUrl(request.getParameter("url"));
+                newCategory.setTarget(request.getParameter("target"));
+                newCategory.setLinkNgoai("1".equals(request.getParameter("linkNgoai")));
+                newCategory.setMaTheLoai(Integer.parseInt(request.getParameter("maTheLoai")));
+                theLoaiDAO.addTheLoaiTin(newCategory);
+                response.sendRedirect("manage-categories");
+                break;
+            case "/edit-category-tin":
+                TheLoaiTin updatedCategory = new TheLoaiTin();
+                updatedCategory.setMaTheLoaiTin(Integer.parseInt(request.getParameter("id")));
+                updatedCategory.setTenTheLoaiTin(request.getParameter("name"));
+                updatedCategory.setVisibleTheLoaiTin("1".equals(request.getParameter("visibleMenu")));
+                updatedCategory.setVisibleTheLoaiTin1("1".equals(request.getParameter("visibleGroup")));
+                updatedCategory.setSapXep(Integer.parseInt(request.getParameter("sort")));
+                updatedCategory.setUrl(request.getParameter("url"));
+                updatedCategory.setTarget(request.getParameter("target"));
+                updatedCategory.setLinkNgoai("1".equals(request.getParameter("linkNgoai")));
+                updatedCategory.setMaTheLoai(Integer.parseInt(request.getParameter("maTheLoai")));
+                theLoaiDAO.editTheLoaiTin(updatedCategory);
+                response.sendRedirect("manage-categories");
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+}

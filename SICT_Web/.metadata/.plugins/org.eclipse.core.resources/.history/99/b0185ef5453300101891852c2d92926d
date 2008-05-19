@@ -1,0 +1,131 @@
+package Controller;
+
+import Dal.TheLoaiDAO;
+import Model.TheLoaiTin;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.util.List;
+
+public class NewsCategoryController extends HttpServlet {
+
+    private TheLoaiDAO nDB;
+
+    @Override
+    public void init() throws ServletException {
+        nDB = new TheLoaiDAO();
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String url = request.getServletPath();
+        switch (url.toLowerCase()) {
+            case "/category":
+                manageCategory(request, response);
+                break;
+            case "/categorydelete":
+                deleteCategory(request, response);
+                break;
+            case "/categoryedit":
+                editCategory(request, response);
+                break;
+            case "/categoryadd":
+                addCategory(request, response);
+                break;
+        }
+    }
+
+    protected void manageCategory(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int page = 1;
+        int pageSize = 5;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
+        List<TheLoaiTin> listN = nDB.getAllTheLoaiTin();
+        int totalNews = listN.size();
+        int totalPages = (int) Math.ceil((double) totalNews / pageSize);
+
+        request.setAttribute("listN", listN);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("totalNews", totalNews);
+
+        request.getRequestDispatcher("ManagerCategory.jsp").forward(request, response);
+    }
+
+    protected void deleteCategory(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String nID = request.getParameter("nID");
+        nDB.deleteTheLoaiTin(nID);
+        response.sendRedirect("category");
+    }
+
+    protected void addCategory(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String name = request.getParameter("name");
+            boolean visibleMenu = "on".equals(request.getParameter("visibleMenu"));
+            boolean visibleGroup = "on".equals(request.getParameter("visibleGroup"));
+            int sortOrder = Integer.parseInt(request.getParameter("sortOrder"));
+            String url = request.getParameter("url");
+            String target = request.getParameter("target");
+            boolean externalLink = "on".equals(request.getParameter("externalLink"));
+            int parentCategoryId = Integer.parseInt(request.getParameter("parentCategory"));
+
+            int nextId = nDB.getNextMaTheLoaiTin();
+            TheLoaiTin cat = new TheLoaiTin(nextId, name, visibleMenu, visibleGroup, sortOrder,
+                    url, target, externalLink, parentCategoryId);
+
+            nDB.addTheLoaiTin(cat);
+            response.sendRedirect("category");
+        } catch (Exception e) {
+            request.setAttribute("error", "Lỗi khi thêm thể loại tin: " + e.getMessage());
+            manageCategory(request, response);
+        }
+    }
+
+    protected void editCategory(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String name = request.getParameter("name");
+            boolean visibleMenu = "on".equals(request.getParameter("visibleMenu"));
+            boolean visibleGroup = "on".equals(request.getParameter("visibleGroup"));
+            int sortOrder = Integer.parseInt(request.getParameter("sortOrder"));
+            String url = request.getParameter("url");
+            String target = request.getParameter("target");
+            boolean externalLink = "on".equals(request.getParameter("externalLink"));
+            int parentCategoryId = Integer.parseInt(request.getParameter("parentCategory"));
+
+            TheLoaiTin cat = new TheLoaiTin(id, name, visibleMenu, visibleGroup, sortOrder,
+                    url, target, externalLink, parentCategoryId);
+
+            nDB.editTheLoaiTin(cat);
+            response.sendRedirect("category");
+        } catch (Exception e) {
+            request.setAttribute("error", "Lỗi khi cập nhật thể loại tin: " + e.getMessage());
+            manageCategory(request, response);
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Controller quản lý thể loại tin";
+    }
+}

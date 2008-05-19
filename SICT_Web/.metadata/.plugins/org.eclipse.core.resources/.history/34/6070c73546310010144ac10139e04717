@@ -1,0 +1,72 @@
+// File: src/main/java/vn/Servlet/XemTinTucServlet.java
+package java.vn.Servlet;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.vn.connection.DatabaseConnection;
+import java.vn.model.TinTuc;
+
+@WebServlet("/xem-tin-tuc")
+public class XemTinTucServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        String matintucParam = request.getParameter("matintuc");
+        if (matintucParam == null) {
+            request.setAttribute("error", "Thiếu mã tin tức để hiển thị nội dung.");
+            request.getRequestDispatcher("/XemTinTuc.jsp").forward(request, response);
+            return;
+        }
+
+        TinTuc news = null;
+        try {
+            int matintuc = Integer.parseInt(matintucParam);
+            try (Connection conn = DatabaseConnection.getConnection()) {
+                String sql = "SELECT MaTinTuc, TieuDeTinTuc, NoiDungTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag FROM TinTuc WHERE MaTinTuc = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, matintuc);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    news = new TinTuc();
+                    news.setMaTinTuc(rs.getInt("MaTinTuc"));
+                    news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                    news.setNoiDungTin(rs.getString("NoiDungTin"));
+                    Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                    if (timestamp != null) {
+                        news.setNgayCapNhat(timestamp.toLocalDateTime());
+                    }
+                    news.setUrlAnh(rs.getString("UrlAnh"));
+                    news.setSoLanDoc(rs.getInt("SoLanDoc"));
+                    news.setTag(rs.getString("Tag"));
+                } else {
+                    request.setAttribute("error", "Không tìm thấy tin tức.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Mã tin tức không hợp lệ.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Lỗi cơ sở dữ liệu: " + e.getMessage());
+        }
+
+        request.setAttribute("news", news);
+        request.getRequestDispatcher("/XemTinTuc.jsp").forward(request, response);
+    }
+}

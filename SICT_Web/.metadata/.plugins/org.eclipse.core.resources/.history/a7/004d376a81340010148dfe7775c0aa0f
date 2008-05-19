@@ -1,0 +1,112 @@
+package Controller;
+
+import Dal.Admin1DAO;
+import Dal.UserDAO;
+import Model.Admin1;
+import Model.Users;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class LoginController extends HttpServlet {
+
+    Admin1DAO adminDAO = new Admin1DAO();
+    UserDAO userDAO = new UserDAO();
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String url = request.getServletPath();
+        switch (url.toLowerCase()) {
+            case "/login":
+                login(request, response);
+                break;
+            case "/logout":
+                logout(request, response);
+                break;
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = request.getServletPath();
+        switch (url.toLowerCase()) {
+            case "/login":
+                login(request, response);
+                break;
+            case "/logout":
+                logout(request, response);
+                break;
+        }
+    }
+
+    protected void login(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
+    }
+
+    protected void logout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("ADMIN");
+        session.removeAttribute("USER");
+        response.sendRedirect("Login.jsp");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = request.getServletPath();
+        switch (url.toLowerCase()) {
+            case "/signin":
+                postLogin(request, response);
+                break;
+        }
+    }
+
+    protected void postLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("user");
+        String password = request.getParameter("pass");
+        String role = request.getParameter("role"); // New parameter to distinguish user types
+
+        if ("admin".equalsIgnoreCase(role)) {
+            Admin1 admin = adminDAO.login(username, password);
+            if (admin != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("ADMIN", admin);
+                session.setMaxInactiveInterval(900);
+                response.sendRedirect("manage");
+            } else {
+                request.setAttribute("username", username);
+                request.setAttribute("loginError", "Tài khoản admin không đúng, vui lòng nhập lại.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
+        } else if ("user".equalsIgnoreCase(role)) {
+            Users user = userDAO.login(username, password);
+            if (user != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("USER", user);
+                session.setMaxInactiveInterval(1800); // 30 minutes for users
+                response.sendRedirect("trang-chu");
+            } else {
+                request.setAttribute("username", username);
+                request.setAttribute("loginError", "Tài khoản người dùng không đúng, vui lòng nhập lại.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("username", username);
+            request.setAttribute("loginError", "Vui lòng chọn vai trò (Admin hoặc Người dùng).");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Handles login and logout for both admins and users";
+    }
+}

@@ -1,0 +1,56 @@
+// File: src/main/java/vn/Servlet/HomeServlet.java
+package java.vn.Servlet;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.vn.dao.TinTucDAO;
+import java.vn.model.TinTuc;
+
+@WebServlet("/trang-chu")
+public class HomeServlet extends HttpServlet {
+    private TinTucDAO tinTucDAO = new TinTucDAO();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        List<TinTuc> newsList = new ArrayList<>();
+        List<TinTuc> clubList = new ArrayList<>();
+        List<TinTuc> studentList = new ArrayList<>();
+        List<TinTuc> notificationList = new ArrayList<>();
+
+        try {
+            newsList = tinTucDAO.getTopNewsByCategory(10, 5); // Tin tức
+            clubList = tinTucDAO.getTopNewsByCategory(15, 5); // Câu lạc bộ
+            studentList = tinTucDAO.getTopNewsByCategory(16, 5); // Gương sáng sinh viên
+            notificationList = tinTucDAO.getTopNotifications(5); // Thông báo
+        } catch (SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
+        }
+
+        request.setAttribute("newsList", newsList);
+        request.setAttribute("clubList", clubList);
+        request.setAttribute("studentList", studentList);
+        request.setAttribute("notificationList", notificationList);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected [Your Response]
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+}

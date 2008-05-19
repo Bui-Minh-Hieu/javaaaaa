@@ -1,0 +1,139 @@
+package Servlet;
+
+import connection.CommentDAO;
+import model.Comments;
+import model.TinTuc;
+import connection.DatabaseConnection;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/gioi_thieu")
+public class XemGioiThieuServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        TinTuc news = null;
+        String category = request.getParameter("cat");
+        int maTheLoaiTin = 1; // Default to "THÔNG TIN CHUNG"
+        String categoryName = "Thông tin chung";
+
+        // Map category parameter to MaTheLoaiTin and category name
+        if ("co_cau_to_chuc".equals(category)) {
+            maTheLoaiTin = 2;
+            categoryName = "Cơ cấu tổ chức";
+        } else if ("chien_luoc_phat_trien".equals(category)) {
+            maTheLoaiTin = 3;
+            categoryName = "Chiến lược phát triển";
+        } else if ("can_bo_giang_vien".equals(category)) {
+            maTheLoaiTin = 4;
+            categoryName = "Cán bộ giảng viên";
+        } else if ("co_so_vat_chat".equals(category)) {
+            maTheLoaiTin = 5;
+            categoryName = "Cơ sở vật chất";
+        } else if ("lien_he".equals(category)) {
+            maTheLoaiTin = 6;
+            categoryName = "Liên hệ";
+        }
+
+        Connection conn = null;
+        try {
+            conn = DatabaseConnection.getConnection();
+            conn.setAutoCommit(false);
+
+            // Cập nhật số lượt xem
+            String updateSql = "UPDATE TinTuc SET SoLanDoc = SoLanDoc + 1 WHERE MaTheLoaiTin = ? AND MaTheLoai = ?";
+            try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                updateStmt.setInt(1, maTheLoaiTin);
+                updateStmt.setInt(2, 3); // MaTheLoai for "GIỚI THIỆU"
+                updateStmt.executeUpdate();
+            }
+
+            // Lấy dữ liệu sau khi cập nhật
+            String selectSql = "SELECT MaTinTuc, TieuDeTinTuc, TrichDanTin, NoiDungTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag, MaTheLoai, MaTheLoaiTin, MaPhanLoaiTin, MaThanhVien " +
+                             "FROM TinTuc WHERE MaTheLoaiTin = ? AND MaTheLoai = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(selectSql)) {
+                stmt.setInt(1, maTheLoaiTin);
+                stmt.setInt(2, 3); // MaTheLoai for "GIỚI THIỆU"
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    news = new TinTuc();
+                    news.setMaTinTuc(rs.getInt("MaTinTuc"));
+                    news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                    news.setTrichDanTin(rs.getString("TrichDanTin"));
+                    String noiDungTin = rs.getString("NoiDungTin");
+                    if (noiDungTin != null) {
+                        String original = noiDungTin;
+                        // First, replace literal "\n" (escaped in the database) with actual newline
+                        noiDungTin = noiDungTin.replace("\\n", "\n");
+                        // Then, replace actual newlines with <br> for HTML
+                        noiDungTin = noiDungTin.replaceAll("\r\n|\n|\r", "<br>");
+                        System.out.println("Original NoiDungTin: " + original);
+                        System.out.println("Processed NoiDungTin: " + noiDungTin);
+                    }
+                    news.setNoiDungTin(noiDungTin);
+                    news.setNgayCapNhat(rs.getTimestamp("NgayCapNhat").toLocalDateTime());
+                    news.setUrlAnh(rs.getString("UrlAnh"));
+                    news.setSoLanDoc(rs.getInt("SoLanDoc"));
+                    news.setTag(rs.getString("Tag"));
+                    news.setMaTheLoai(rs.getInt("MaTheLoai"));
+                    news.setMaTheLoaiTin(rs.getInt("MaTheLoaiTin"));
+                    news.setMaPhanLoaiTin(rs.getInt("MaPhanLoaiTin"));
+                    news.setMaThanhVien(rs.getInt("MaThanhVien"));
+
+                    // Lấy danh sách bình luận
+                    CommentDAO commentDAO = new CommentDAO();
+                    List<Comments> comments = commentDAO.getCommentsByNewsID(news.getMaTinTuc());
+                    request.setAttribute("comments", comments);
+                } else {
+                    System.out.println("No record found for MaTheLoaiTin: " + maTheLoaiTin + " and MaTheLoai: 3");
+                    request.setAttribute("error", "Không tìm thấy thông tin cho: " + categoryName);
+                }
+            }
+
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        request.setAttribute("news", news);
+        request.setAttribute("categoryName", categoryName);
+        request.getRequestDispatcher("/gioithieu.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+}

@@ -1,0 +1,128 @@
+package com.vn.Servlet;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.vn.connection.DatabaseConnection;
+import com.vn.model.TinTuc;
+
+@WebServlet("/trang-chu")
+public class HomeServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        // Danh sách tin tức
+        List<TinTuc> newsList = new ArrayList<>();
+        // Danh sách câu lạc bộ
+        List<TinTuc> clubList = new ArrayList<>();
+        // Danh sách gương sáng sinh viên
+        List<TinTuc> studentList = new ArrayList<>();
+        // Danh sách thông báo
+        List<TinTuc> notificationList = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            // Truy vấn tin tức (MaTheLoai = 10)
+            String sqlNews = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTheLoai = 10 ORDER BY NgayCapNhat DESC";
+            PreparedStatement stmtNews = conn.prepareStatement(sqlNews);
+            ResultSet rsNews = stmtNews.executeQuery();
+            while (rsNews.next()) {
+                TinTuc news = new TinTuc();
+                news.setMaTinTuc(rsNews.getInt("MaTinTuc"));
+                news.setTieuDeTinTuc(rsNews.getString("TieuDeTinTuc"));
+                news.setTrichDanTin(rsNews.getString("TrichDanTin"));
+                Timestamp timestamp = rsNews.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    news.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                news.setUrlAnh(rsNews.getString("UrlAnh"));
+                newsList.add(news);
+            }
+
+            // Truy vấn câu lạc bộ (giả sử MaTheLoai = 20 cho câu lạc bộ)
+            String sqlClubs = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTheLoai = 20 ORDER BY NgayCapNhat DESC";
+            PreparedStatement stmtClubs = conn.prepareStatement(sqlClubs);
+            ResultSet rsClubs = stmtClubs.executeQuery();
+            while (rsClubs.next()) {
+                TinTuc club = new TinTuc();
+                club.setMaTinTuc(rsClubs.getInt("MaTinTuc"));
+                club.setTieuDeTinTuc(rsClubs.getString("TieuDeTinTuc"));
+                club.setTrichDanTin(rsClubs.getString("TrichDanTin"));
+                Timestamp timestamp = rsClubs.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    club.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                club.setUrlAnh(rsClubs.getString("UrlAnh"));
+                clubList.add(club);
+            }
+
+            // Truy vấn gương sáng sinh viên (giả sử MaTheLoai = 30 cho gương sáng)
+            String sqlStudents = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTheLoai = 30 ORDER BY NgayCapNhat DESC";
+            PreparedStatement stmtStudents = conn.prepareStatement(sqlStudents);
+            ResultSet rsStudents = stmtStudents.executeQuery();
+            while (rsStudents.next()) {
+                TinTuc student = new TinTuc();
+                student.setMaTinTuc(rsStudents.getInt("MaTinTuc"));
+                student.setTieuDeTinTuc(rsStudents.getString("TieuDeTinTuc"));
+                student.setTrichDanTin(rsStudents.getString("TrichDanTin"));
+                Timestamp timestamp = rsStudents.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    student.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                student.setUrlAnh(rsStudents.getString("UrlAnh"));
+                studentList.add(student);
+            }
+
+            // Truy vấn thông báo (giả sử MaTheLoai = 40 cho thông báo)
+            String sqlNotifications = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTheLoai = 40 ORDER BY NgayCapNhat DESC";
+            PreparedStatement stmtNotifications = conn.prepareStatement(sqlNotifications);
+            ResultSet rsNotifications = stmtNotifications.executeQuery();
+            while (rsNotifications.next()) {
+                TinTuc notification = new TinTuc();
+                notification.setMaTinTuc(rsNotifications.getInt("MaTinTuc"));
+                notification.setTieuDeTinTuc(rsNotifications.getString("TieuDeTinTuc"));
+                notification.setTrichDanTin(rsNotifications.getString("TrichDanTin"));
+                Timestamp timestamp = rsNotifications.getTimestamp("NgayCapNhat");
+                if (timestamp != null) {
+                    notification.setNgayCapNhat(timestamp.toLocalDateTime());
+                }
+                notification.setUrlAnh(rsNotifications.getString("UrlAnh"));
+                notificationList.add(notification);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Lỗi khi tải dữ liệu: " + e.getMessage());
+        }
+
+        // Gán các danh sách vào request
+        request.setAttribute("newsList", newsList);
+        request.setAttribute("clubList", clubList);
+        request.setAttribute("studentList", studentList);
+        request.setAttribute("notificationList", notificationList);
+
+        // Chuyển tiếp đến index.jsp
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+}

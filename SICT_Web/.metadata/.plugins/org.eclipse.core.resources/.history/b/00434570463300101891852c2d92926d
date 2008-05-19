@@ -1,0 +1,270 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quản lý tin tức</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/manager.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .table img {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        table.table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        table.table tr th, table.table tr td {
+            border: none;
+            padding: 16px;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            border-radius: 6px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .table-title h2 {
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .modal .modal-content {
+            background: #fefefe;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .modal-header h4 {
+            font-size: 1.5rem;
+        }
+        .modal-footer .btn {
+            padding: 8px 16px;
+        }
+        .pagination .page-link {
+            color: #007bff;
+            border-radius: 50%;
+            padding: 6px 12px;
+        }
+        .pagination .page-link:hover {
+            background: #007bff;
+            color: #fff;
+        }
+        .table-title .btn {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .table-title .btn:hover {
+            color: #fff;
+            background: #0056b3;
+        }
+        .table-striped.table-hover tbody tr:hover {
+            background: rgba(0, 123, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Quản lý Thể loại tin</h2>
+
+    <div class="d-flex justify-content-between mb-3">
+        <input type="text" id="searchInput" class="form-control w-25" placeholder="Tìm thể loại tin...">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Thêm thể loại tin</button>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Tên thể loại tin</th>
+                <th>Hiển thị Menu</th>
+                <th>Hiển thị nhóm</th>
+                <th>Sắp xếp</th>
+                <th>Liên kết ngoài</th>
+                <th>URL</th>
+                <th>Target</th>
+                <th>Thể loại cha</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody id="categoryTableBody">
+            <c:forEach var="item" items="${listTheLoaiTin}">
+                <tr>
+                    <td>${item.maTheLoaiTin}</td>
+                    <td>${item.tenTheLoaiTin}</td>
+                    <td><c:if test="${item.visibleTheLoaiTin}">✔</c:if></td>
+                    <td><c:if test="${item.visibleTheLoaiTin1}">✔</c:if></td>
+                    <td>${item.sapXep}</td>
+                    <td><c:if test="${item.linkNgoai}">✔</c:if></td>
+                    <td>${item.url}</td>
+                    <td>${item.target}</td>
+                    <td>${item.maTheLoai}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editCategoryModal"
+                                data-id="${item.maTheLoaiTin}"
+                                data-name="${item.tenTheLoaiTin}"
+                                data-visiblemenu="${item.visibleTheLoaiTin}"
+                                data-visiblegroup="${item.visibleTheLoaiTin1}"
+                                data-sort="${item.sapXep}"
+                                data-url="${item.url}"
+                                data-target="${item.target}"
+                                data-linkngoai="${item.linkNgoai}"
+                                data-matheloai="${item.maTheLoai}">
+                            Sửa
+                        </button>
+                        <button class="btn btn-sm btn-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteCategoryModal"
+                                data-id="${item.maTheLoaiTin}">
+                            Xóa
+                        </button>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Thêm -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="add-category-tin" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm thể loại tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <input name="name" class="form-control mb-2" placeholder="Tên thể loại tin" required>
+                <input name="url" class="form-control mb-2" placeholder="URL">
+                <input name="target" class="form-control mb-2" placeholder="Target (_blank, _self...)">
+                <input name="sort" type="number" class="form-control mb-2" placeholder="Sắp xếp">
+                <input name="maTheLoai" type="number" class="form-control mb-2" placeholder="ID thể loại cha" required>
+                <div class="form-check">
+                    <input name="visibleMenu" class="form-check-input" type="checkbox" value="1">
+                    <label class="form-check-label">Hiển thị trên menu</label>
+                </div>
+                <div class="form-check">
+                    <input name="visibleGroup" class="form-check-input" type="checkbox" value="1">
+                    <label class="form-check-label">Hiển thị trên nhóm</label>
+                </div>
+                <div class="form-check">
+                    <input name="linkNgoai" class="form-check-input" type="checkbox" value="1">
+                    <label class="form-check-label">Là liên kết ngoài</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary">Thêm</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Sửa -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="edit-category-tin" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sửa thể loại tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id">
+                <input name="name" class="form-control mb-2" required>
+                <input name="url" class="form-control mb-2">
+                <input name="target" class="form-control mb-2">
+                <input name="sort" type="number" class="form-control mb-2">
+                <input name="maTheLoai" type="number" class="form-control mb-2">
+                <div class="form-check">
+                    <input name="visibleMenu" class="form-check-input" type="checkbox" value="1" id="editVisibleMenu">
+                    <label class="form-check-label" for="editVisibleMenu">Hiển thị trên menu</label>
+                </div>
+                <div class="form-check">
+                    <input name="visibleGroup" class="form-check-input" type="checkbox" value="1" id="editVisibleGroup">
+                    <label class="form-check-label" for="editVisibleGroup">Hiển thị trên nhóm</label>
+                </div>
+                <div class="form-check">
+                    <input name="linkNgoai" class="form-check-input" type="checkbox" value="1" id="editLinkNgoai">
+                    <label class="form-check-label" for="editLinkNgoai">Là liên kết ngoài</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Xóa -->
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="delete-category-tin" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa thể loại tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa thể loại tin này?</p>
+                <input type="hidden" name="id" id="deleteCategoryId">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-danger">Xóa</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Tìm kiếm
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        const val = this.value.toLowerCase();
+        document.querySelectorAll("#categoryTableBody tr").forEach(tr => {
+            tr.style.display = tr.textContent.toLowerCase().includes(val) ? "" : "none";
+        });
+    });
+
+    // Modal sửa
+    const editModal = document.getElementById("editCategoryModal");
+    editModal.addEventListener("show.bs.modal", function (event) {
+        const btn = event.relatedTarget;
+        const form = this.querySelector("form");
+
+        form.querySelector("input[name='id']").value = btn.getAttribute("data-id");
+        form.querySelector("input[name='name']").value = btn.getAttribute("data-name");
+        form.querySelector("input[name='url']").value = btn.getAttribute("data-url");
+        form.querySelector("input[name='target']").value = btn.getAttribute("data-target");
+        form.querySelector("input[name='sort']").value = btn.getAttribute("data-sort");
+        form.querySelector("input[name='maTheLoai']").value = btn.getAttribute("data-matheloai");
+
+        form.querySelector("input[name='visibleMenu']").checked = btn.getAttribute("data-visiblemenu") === "true";
+        form.querySelector("input[name='visibleGroup']").checked = btn.getAttribute("data-visiblegroup") === "true";
+        form.querySelector("input[name='linkNgoai']").checked = btn.getAttribute("data-linkngoai") === "true";
+    });
+
+    // Modal xóa
+    const deleteModal = document.getElementById("deleteCategoryModal");
+    deleteModal.addEventListener("show.bs.modal", function (event) {
+        const btn = event.relatedTarget;
+        document.getElementById("deleteCategoryId").value = btn.getAttribute("data-id");
+    });
+</script>
+
+</body>
+</html>
+

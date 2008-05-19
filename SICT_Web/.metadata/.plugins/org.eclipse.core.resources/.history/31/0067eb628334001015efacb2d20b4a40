@@ -1,0 +1,89 @@
+package Controller;
+
+import Dal.UserDAO;
+import Model.Users;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet({"/user/login", "/user/signin", "/user/logout"})
+public class UserLoginController extends HttpServlet {
+
+    private UserDAO userDAO = new UserDAO();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String url = request.getServletPath();
+        switch (url.toLowerCase()) {
+            case "/user/login":
+                login(request, response);
+                break;
+            case "/user/logout":
+                logout(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String url = request.getServletPath();
+        switch (url.toLowerCase()) {
+            case "/user/signin":
+                postLogin(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    protected void login(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/UserLogin.jsp").forward(request, response);
+    }
+
+    protected void logout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("USER");
+        response.sendRedirect("login");
+    }
+
+    protected void postLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("user");
+        String password = request.getParameter("pass");
+
+        if (username == null || password == null || username.trim().isEmpty() || password.trim().isEmpty()) {
+            request.setAttribute("loginError", "Vui lòng nhập tên đăng nhập và mật khẩu.");
+            request.getRequestDispatcher("/UserLogin.jsp").forward(request, response);
+            return;
+        }
+
+        Users user = userDAO.login(username, password);
+        if (user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("USER", user);
+            session.setMaxInactiveInterval(1800); // 30 minutes
+            response.sendRedirect(request.getContextPath() + "/trang-chu");
+        } else {
+            request.setAttribute("username", username);
+            request.setAttribute("loginError", "Tên đăng nhập hoặc mật khẩu không đúng.");
+            request.getRequestDispatcher("/UserLogin.jsp").forward(request, response);
+        }
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Handles user login and logout";
+    }
+}
