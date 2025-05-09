@@ -10,20 +10,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${tieuDe != null ? tieuDe : 'Tin Tức Chi Tiết'}</title>
+    <title>SICT News</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
         html {
-            font-size: 16px;
+            font-size: 16px; /* Base font size for rem units */
         }
         body {
             background-color: #f5f5f5;
             font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            width: 100%;
         }
 
         /* Header Styles */
@@ -39,11 +39,11 @@
             align-items: center;
         }
         .header-top img {
-            height: 2.5rem;
+            height: 2.5rem; /* ~40px */
             margin-right: 0.625rem;
         }
         .header-top h1 {
-            font-size: 1rem;
+            font-size: 1rem; /* ~16px */
             color: #003087;
             margin: 0;
             font-weight: 700;
@@ -69,7 +69,7 @@
             font-weight: bold;
             text-decoration: none;
             white-space: nowrap;
-            font-size: 0.875rem;
+            font-size: 0.875rem; /* ~14px */
         }
         .navbar > li:hover {
             background-color: #0055b3;
@@ -80,7 +80,7 @@
             left: 0;
             background-color: white;
             list-style: none;
-            min-width: 13.75rem;
+            min-width: 13.75rem; /* 220px */
             display: none;
             padding: 0.625rem 0;
             margin: 0;
@@ -95,7 +95,7 @@
             text-decoration: none;
             font-weight: bold;
             white-space: nowrap;
-            font-size: 0.8125rem;
+            font-size: 0.8125rem; /* ~13px */
         }
         .dropdown li a:hover {
             background-color: #f0f0f0;
@@ -133,78 +133,85 @@
             display: block;
         }
 
-        /* News Detail Styles */
-        .container-fluid {
-            width: 100% !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        .row {
-            margin: 0 !important;
-            width: 100%;
-        }
-        .col-md-12 {
-            padding: 0 0.9375rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .news-detail {
+        /* News Item Styles */
+        .news-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
             background-color: white;
-            padding: 1.25rem;
+            padding: 0.9375rem;
             border-radius: 0.5rem;
             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
-            margin-bottom: 1.25rem;
+            transition: box-shadow 0.2s;
         }
-        .news-title {
-            font-size: 2rem;
+        .news-item:hover {
+            box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.15);
+        }
+        .news-item img {
+            max-width: 12.5rem;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 0.3125rem;
+            margin-right: 0.9375rem;
+        }
+        .news-item .content {
+            flex: 1;
+        }
+        .news-item .content h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+        .news-item .content h3 a {
             color: #003087;
+            text-decoration: none;
+        }
+        .news-item .content h3 a:hover {
+            text-decoration: underline;
+        }
+        .news-item .content .date {
+            color: #666;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .news-item .content .summary {
+            color: #333;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Recent News Sidebar Styles */
+        .recent-news {
+            background-color: white;
+            padding: 0.9375rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+        }
+        .recent-news h4 {
+            color: #003087;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.9375rem;
+            border-bottom: 0.125rem solid #003087;
+            padding-bottom: 0.3125rem;
+        }
+        .recent-news ul {
+            list-style: none;
+            padding: 0;
+        }
+        .recent-news ul li {
             margin-bottom: 0.625rem;
         }
-        .news-date {
-            color: #666;
-            font-size: 0.875rem;
-            margin-bottom: 0.9375rem;
-        }
-        .news-image {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.3125rem;
-            margin-bottom: 1.25rem;
-        }
-        .news-summary {
-            font-style: italic;
-            color: #555;
-            margin-bottom: 1.25rem;
-            font-size: 1rem;
-            border-left: 0.1875rem solid #003087;
-            padding-left: 0.9375rem;
-        }
-        .news-content {
-            line-height: 1.6;
+        .recent-news ul li a {
             color: #333;
-            font-size: 1rem;
+            text-decoration: none;
+            font-size: 0.8125rem;
+            display: block;
+            transition: color 0.2s;
         }
-        .breadcrumb {
-            background-color: transparent;
-            padding: 0.625rem 0;
-        }
-        .breadcrumb a {
+        .recent-news ul li a:hover {
             color: #003087;
-            text-decoration: none;
-        }
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 1.25rem;
-            color: #007bff;
-            text-decoration: none;
-            font-size: 0.875rem;
-        }
-        .back-link:hover {
-            text-decoration: underline;
         }
 
         /* Footer Styles */
@@ -213,17 +220,17 @@
             color: white;
             font-family: 'Roboto', Arial, sans-serif;
             padding: 1.25rem 0;
-            width: 100% !important;
+            width: 100%;
             box-sizing: border-box;
             text-align: center;
         }
         .footer-container {
-            width: 100% !important;
-            padding: 0 1rem;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 1.875rem;
+            width: 100%;
+            padding: 0 1rem;
         }
         .footer-col {
             flex: 1;
@@ -263,7 +270,7 @@
             text-decoration: none;
         }
         .social-icons i {
-            font-size: 1.375rem;
+            font-size: 1.375rem; /* 22px */
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -275,7 +282,7 @@
             position: fixed;
             bottom: 1.25rem;
             right: 1.25rem;
-            font-size: 2.25rem;
+            font-size: 2.25rem; /* 36px */
             color: #fff;
             background-color: #007bff;
             border-radius: 50%;
@@ -388,31 +395,65 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class="news-detail">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
-                            <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/">Tin tức</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">${tieuDe}</li>
-                        </ol>
-                    </nav>
-                    <% if (request.getAttribute("error") != null) { %>
-                        <div class="alert alert-danger" role="alert">
-                            <%= request.getAttribute("error") %>
-                        </div>
+            <!-- Main News List -->
+            <div class="col-md-8">
+                <%
+                    try (Connection conn = DatabaseConnection.getConnection()) {
+                        String sql = "SELECT TOP 10 MaTinTuc, TieuDeTinTuc, TrichDanTin, NgayCapNhat, UrlAnh FROM TinTuc ORDER BY NgayCapNhat DESC";
+                        PreparedStatement stmt = conn.prepareStatement(sql);
+                        ResultSet rs = stmt.executeQuery();
+                        while (rs.next()) {
+                            int maTinTuc = rs.getInt("MaTinTuc");
+                            String tieuDe = rs.getString("TieuDeTinTuc");
+                            String trichDan = rs.getString("TrichDanTin");
+                            String ngayCapNhat = rs.getTimestamp("NgayCapNhat") != null ? rs.getTimestamp("NgayCapNhat").toString() : "";
+                            String urlAnh = rs.getString("UrlAnh");
+                            String slug = tieuDe.toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9-]", "");
+                %>
+                <div class="news-item">
+                    <% if (urlAnh != null && !urlAnh.isEmpty()) { %>
+                        <img src="<%= urlAnh %>" alt="News Image">
                     <% } else { %>
-                        <h1 class="news-title">${tieuDe}</h1>
-                        <p class="news-date">${ngayCapNhat}</p>
-                        <% if (request.getAttribute("urlAnh") != null && !request.getAttribute("urlAnh").equals("")) { %>
-                            <img src="${urlAnh}" alt="Tin tức ảnh" class="news-image">
-                        <% } else { %>
-                            <p>Không có hình ảnh cho bài viết này.</p>
-                        <% } %>
-                        <div class="news-summary">${trichDanTin}</div>
-                        <div class="news-content">${noiDungTin}</div>
+                        <img src="https://via.placeholder.com/200x150" alt="Default Image">
                     <% } %>
-                    <a href="${pageContext.request.contextPath}/" class="back-link">Quay lại</a>
+                    <div class="content">
+                        <h3><a href="tin-tuc/<%= slug %>/<%= maTinTuc %>"><%= tieuDe %></a></h3>
+                        <div class="date"><%= ngayCapNhat %></div>
+                        <div class="summary"><%= trichDan %></div>
+                    </div>
+                </div>
+                <%
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        out.println("<p class='text-danger'>Lỗi khi tải danh sách tin tức: " + e.getMessage() + "</p>");
+                    }
+                %>
+            </div>
+            <!-- Recent News Sidebar -->
+            <div class="col-md-4">
+                <div class="recent-news">
+                    <h4>Tin Tiêu Điểm</h4>
+                    <ul>
+                        <%
+                            try (Connection conn = DatabaseConnection.getConnection()) {
+                                String sql = "SELECT TOP 5 MaTinTuc, TieuDeTinTuc FROM TinTuc ORDER BY NgayCapNhat DESC";
+                                PreparedStatement stmt = conn.prepareStatement(sql);
+                                ResultSet rs = stmt.executeQuery();
+                                while (rs.next()) {
+                                    int maTinTuc = rs.getInt("MaTinTuc");
+                                    String tieuDe = rs.getString("TieuDeTinTuc");
+                                    String slug = tieuDe.toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9-]", "");
+                        %>
+                        <li><a href="tin-tuc/<%= slug %>/<%= maTinTuc %>"><%= tieuDe %></a></li>
+                        <%
+                                }
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                                out.println("<p class='text-danger'>Lỗi khi tải tin tức gần đây: " + e.getMessage() + "</p>");
+                            }
+                        %>
+                    </ul>
                 </div>
             </div>
         </div>

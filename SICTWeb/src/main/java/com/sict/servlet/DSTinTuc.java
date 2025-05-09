@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/index")
-public class IndexServlet extends HttpServlet {
+public class DSTinTuc extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         System.out.println("IndexServlet accessed");
-        response.sendRedirect("index.jsp");
+        // Sử dụng RequestDispatcher để chuyển tiếp nội bộ
+        request.getRequestDispatcher("/dstintuc.jsp").forward(request, response);
     }
 }

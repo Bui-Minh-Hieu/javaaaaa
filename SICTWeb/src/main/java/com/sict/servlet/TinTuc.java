@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/tin-tuc/*")
-public class NewsServlet extends HttpServlet {
+public class TinTuc extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -68,7 +68,6 @@ public class NewsServlet extends HttpServlet {
             e.printStackTrace();
             request.setAttribute("error", "Lỗi cơ sở dữ liệu: " + e.getMessage());
         }
-
         request.setAttribute("tieuDe", tieuDe);
         request.setAttribute("trichDanTin", trichDanTin);
         request.setAttribute("noiDungTin", noiDungTin);
