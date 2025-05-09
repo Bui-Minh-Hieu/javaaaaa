@@ -1,0 +1,65 @@
+package com.sict.servlet;
+
+import com.sict.database.DatabaseConnection;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/news")
+public class NewsServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        System.out.println("NewsServlet được truy cập với id: " + request.getParameter("id"));
+        int id;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "ID tin tức không hợp lệ");
+            request.getRequestDispatcher("/WEB-INF/tintuc.jsp").forward(request, response);
+            return;
+        }
+
+        String tieuDe = "";
+        String trichDanTin = "";
+        String noiDungTin = "";
+        String ngayCapNhat = "";
+        String urlAnh = ""; // Sử dụng UrlAnh thay vì HinhAnh
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "SELECT TieuDeTinTuc, TrichDanTin, NoiDungTin, NgayCapNhat, UrlAnh FROM TinTuc WHERE MaTinTuc = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                tieuDe = rs.getString("TieuDeTinTuc");
+                trichDanTin = rs.getString("TrichDanTin");
+                noiDungTin = rs.getString("NoiDungTin");
+                ngayCapNhat = rs.getTimestamp("NgayCapNhat") != null ? rs.getTimestamp("NgayCapNhat").toString() : "";
+                urlAnh = rs.getString("UrlAnh");
+            } else {
+                request.setAttribute("error", "Bài viết không được tìm thấy");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Lỗi cơ sở dữ liệu: " + e.getMessage());
+        }
+
+        request.setAttribute("tieuDe", tieuDe);
+        request.setAttribute("trichDanTin", trichDanTin);
+        request.setAttribute("noiDungTin", noiDungTin);
+        request.setAttribute("ngayCapNhat", ngayCapNhat);
+        request.setAttribute("urlAnh", urlAnh); // Sử dụng urlAnh
+        request.getRequestDispatcher("/WEB-INF/tintuc.jsp").forward(request, response);
+    }
+}

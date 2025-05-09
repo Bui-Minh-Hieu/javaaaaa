@@ -1,0 +1,67 @@
+package com.sict.servlet;
+
+import com.sict.db.DatabaseConnection;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/news")
+public class NewsServlet extends HttpServlet {
+    // Class để lưu dữ liệu tin tức
+    public class News {
+        private String tieuDeTinTuc;
+        private String trichDanTin;
+
+        public String getTieuDeTinTuc() { return tieuDeTinTuc; }
+        public void setTieuDeTinTuc(String tieuDeTinTuc) { this.tieuDeTinTuc = tieuDeTinTuc; }
+        public String getTrichDanTin() { return trichDanTin; }
+        public void setTrichDanTin(String trichDanTin) { this.trichDanTin = trichDanTin; }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Connection conn = DatabaseConnection.getConnection();
+        List<News> newsList = new ArrayList<>();
+
+        if (conn != null) {
+            try {
+                String sql = "SELECT TieuDeTinTuc, TrichDanTin FROM TinTuc WHERE MaTheLoai = ? AND MaTheLoaiTin = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, 10); // Ví dụ: Tin tức từ TheLoai 10 (TIN TỨC)
+                stmt.setInt(2, 1);  // Ví dụ: TheLoaiTin 1 (THÔNG TIN CHUNG)
+                ResultSet rs = stmt.executeQuery();
+
+                // Lấy dữ liệu và lưu vào newsList
+                while (rs.next()) {
+                    News news = new News();
+                    news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                    news.setTrichDanTin(rs.getString("TrichDanTin"));
+                    newsList.add(news);
+                }
+
+                // Truyền dữ liệu sang index.jsp
+                request.setAttribute("newsList", newsList);
+                // Forward đến index.jsp
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+                DatabaseConnection.closeConnection(conn);
+            } catch (SQLException e) {
+                request.setAttribute("error", "Lỗi: " + e.getMessage());
+                request.getRequestDispatcher("/error.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("error", "Kết nối database thất bại!");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
+        }
+    }
+}

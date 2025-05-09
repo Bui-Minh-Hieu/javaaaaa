@@ -1,0 +1,1273 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Trường Công nghệ thông tin và Truyền thông">
+    <meta name="copyright" content="Copyright 2017 by https://www.haui.edu.vn">
+    <meta name="abstract" content="Trường Công nghệ thông tin và Truyền thông">
+    <meta name="distribution" content="Global">
+    <meta name="keywords" content="Trường Công nghệ thông tin và Truyền thông,Trường Công nghệ thông tin và Truyền thông, Đại học, Cao đẳng, Đào tạo, trường đại học, đào tạo tín chỉ, Haui, Hanoi University of Industry, anh hùng lao động,khoa học công nghệ">
+    <meta name="author" content="haui.edu.vn">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Trường Công nghệ thông tin và Truyền thông || HaUI-SICT">
+    <meta property="og:description" content="Cổng thông tin Trường Công nghệ thông tin và Truyền thông">
+    <meta property="og:url" content="//slt.haui.edu.vn">
+    <meta property="og:site_name" content="Trường Công nghệ thông tin và Truyền thông">
+    <meta property="og:image" content="">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+    <meta property="fb:pages" content="230484353809735">
+    <link rel="canonical" href="https://www.haui.edu.vn/">
+    <!-- Favicon -->
+    <link href="https://sict.haui.edu.vn/dnn/web/haui/assets/images/favicon.png" rel="icon" type="image/png">
+    <link href="https://sict.haui.edu.vn/dnn/web/haui/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+
+    <!-- Efinance Title -->
+    <title>Trường Công nghệ thông tin và Truyền thông || HaUI-SICT</title>
+    <link href="/vn/content/css?v=ulDEUnaRoQv08E_FCTU-PpbhUGwQWYFAvQV-EZ66Jsk1" rel="stylesheet">
+
+    <style>
+        .navbar-brand > img {
+            max-width: 330px !important;
+        }
+    </style>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <script async="" type="text/javascript">
+        var oAppPath = 'https://sict.haui.edu.vn/vn/', oDnnUrl = 'https://sict.haui.edu.vn/dnn/', oTemplateApp = 'haui', oMediaUrl = 'https://sict.haui.edu.vn/media/';
+        var dnnUrlFull = oDnnUrl;
+        var oRootUrl = 'https://sict.haui.edu.vn';
+    </script>
+</head>
+<body>
+    <!-- Main Header Start -->
+    <div class="top-navigation hidden-xs">
+        <div class="container">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="row">
+                            <a class="navbar-brand" href="/vn/">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo-ngang.svg" src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo-ngang.svg" alt="Trường Công nghệ thông tin và Truyền thông" width="100%" height="100%" class="lazyload">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-sm-6">
+                        <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="flipInY">
+                            <li><a href="/vn"> <img src="https://sict.haui.edu.vn/dnn/web/haui/images/vn.png" alt="Tiếng Việt" title="Tiếng Việt"></a></li>
+                            <li><a href="#"> <img src="https://sict.haui.edu.vn/dnn/web/haui/images/en.png" alt="Tiếng Anh" title="Tiếng Anh"> </a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="irs-main-header">
+        
+        <div class="irs-header-nav scrollingto-fixed scroll-to-fixed-fixed" style="z-index: 1000; position: fixed; top: 0px; margin-left: 0px; width: 271px; left: 0px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                            <nav class="navbar navbar-default irs-navbar">
+                                <div class="container-fluid">
+
+                                    <!-- Brand and toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <a class="navbar-brand hidden-md hidden-sm hidden-lg" href="/vn/">
+                                            <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo-ngang.svg" src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo-ngang.svg" alt="Trường ngoài ngữ du lịch" width="100%" height="100%" class=" ls-is-cached lazyloaded">
+                                        </a>
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+
+                                    </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav navbar-left" data-hover="dropdown" data-animations="flipInY">    <li class="active">        <a href="/vn/"><i class="icofont icofont-home" aria-hidden="true" style="font-size: 20px"></i></a>    </li><li>        <a href="https://www.haui.edu.vn" title="TRANG HaUI">TRANG HaUI</a>    </li><li class="dropdown">        <a href="/vn/html/gioi-thieu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">GIỚI THIỆU <i class="icofont icofont-thin-down"></i></a>         <ul class="dropdown-menu"><li>    <a href="/vn/html/thong-tin-chung" title="THÔNG TIN CHUNG">THÔNG TIN CHUNG</a></li><li>    <a href="/vn/html/bo-may-to-chuc" title="CƠ CẤU TỔ CHỨC">CƠ CẤU TỔ CHỨC</a></li><li>    <a href="/vn/html/chien-luoc-phat-trien" title="CHIẾN LƯỢC PHÁT TRIỂN">CHIẾN LƯỢC PHÁT TRIỂN</a></li><li>    <a href="/vn/html/can-bo-giang-vien" title="CÁN BỘ GIẢNG VIÊN">CÁN BỘ GIẢNG VIÊN</a></li><li>    <a href="/vn/html/co-so-vat-chat" title="CƠ SỞ VẬT CHẤT">CƠ SỞ VẬT CHẤT</a></li><li>    <a href="/vn/html/dia-chi-lien-he" title="LIÊN HỆ">LIÊN HỆ</a></li></ul>    </li><li class="dropdown">        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ĐÀO TẠO <i class="icofont icofont-thin-down"></i></a>         <ul class="dropdown-menu"><li class="dropdown-submenu"><a href="" title="ĐẠI HỌC">ĐẠI HỌC</a><ul class="dropdown-menu"><li><a href="/vn/html/khoa-hoc-may-tinh" title="KHOA HỌC MÁY TÍNH">KHOA HỌC MÁY TÍNH</a>                        </li><li><a href="/vn/html/ky-thuat-phan-mem" title="KỸ THUẬT PHẦN MỀM">KỸ THUẬT PHẦN MỀM</a>                        </li><li><a href="/vn/html/dai-hoc-he-thong-thong-tin" title="HỆ THỐNG THÔNG TIN">HỆ THỐNG THÔNG TIN</a>                        </li><li><a href="/vn/html/cong-nghe-thong-tin" title="CÔNG NGHỆ THÔNG TIN">CÔNG NGHỆ THÔNG TIN</a>                        </li><li><a href="/vn/html/cong-nghe-da-phuong-tien" title="CÔNG NGHỆ ĐA PHƯƠNG TIỆN">CÔNG NGHỆ ĐA PHƯƠNG TIỆN</a>                        </li><li><a href="/vn/html/an-toan-thong-tin" title="AN TOÀN THÔNG TIN">AN TOÀN THÔNG TIN</a>                        </li></ul></li><li class="dropdown-submenu"><a href="/vn/html/sau-dai-hoc" title="SAU ĐẠI HỌC">SAU ĐẠI HỌC</a><ul class="dropdown-menu"><li><a href="/vn/html/cao-hoc-he-thong-thong-tin" title="HỆ THỐNG THÔNG TIN">HỆ THỐNG THÔNG TIN</a>                        </li></ul></li><li>    <a href="/vn/ke-hoach" title="KẾ HOẠCH">KẾ HOẠCH</a></li><li>    <a href="/vn/tien-do" title="TIẾN ĐỘ">TIẾN ĐỘ</a></li><li>    <a href="/vn/html/quy-che" title="QUY CHẾ, BIỂU MẪU">QUY CHẾ, BIỂU MẪU</a></li></ul>    </li><li class="dropdown">        <a href="/vn/tuyen-sinh" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TUYỂN SINH <i class="icofont icofont-thin-down"></i></a>         <ul class="dropdown-menu"><li>    <a href="/vn/tuyen-sinh-dai-hoc" title="Đại học">Đại học</a></li><li>    <a href="/vn/tuyen-sinh-sau-dai-hoc" title="Sau đại học">Sau đại học</a></li></ul>    </li><li class="dropdown">        <a href="/vn/html/khoa" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">KHOA <i class="icofont icofont-thin-down"></i></a>         <ul class="dropdown-menu"><li>    <a href="/vn/html/khoa-cong-nghe-thong-tin" title="Khoa Công nghệ thông tin">Khoa Công nghệ thông tin</a></li><li>    <a href="/vn/html/khoa-cong-nghe-phan-mem" title="Khoa Công nghệ phần mềm">Khoa Công nghệ phần mềm</a></li><li>    <a href="/vn/html/khoa-khoa-hoc-may-tinh" title="Khoa Khoa học máy tính">Khoa Khoa học máy tính</a></li><li>    <a href="/vn/html/khoa-mang-may-tinh-va-truyen-thong" title="Khoa Mạng máy tính và truyền thông">Khoa Mạng máy tính và truyền thông</a></li></ul>    </li><li class="dropdown">        <a href="/vn/html/phong-trung-tam" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PHÒNG/TRUNG TÂM <i class="icofont icofont-thin-down"></i></a>         <ul class="dropdown-menu"><li>    <a href="/vn/html/phong-tong-hop" title="Phòng tổng hợp">Phòng tổng hợp</a></li><li>    <a href="/vn/html/trung-tam-hop-tac-phat-trien" title="Trung tâm Hợp tác phát triển">Trung tâm Hợp tác phát triển</a></li><li>    <a href="/vn/html/trung-tam-nghien-cuu-cong-nghe-tien-tien-ict" title="Trung tâm Nghiên cứu công nghệ tiên tiến ICT">Trung tâm Nghiên cứu công nghệ tiên tiến ICT</a></li></ul>    </li><li class="dropdown">        <a href="/vn/nghien-cuu-khoa-hoc" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">KHOA HỌC - CÔNG NGHỆ <i class="icofont icofont-thin-down"></i></a>         <ul class="dropdown-menu"><li>    <a href="/vn/danh-muc-cong-trinh-da-cong-bo" title="Công trình công bố">Công trình công bố</a></li><li>    <a href="/vn/de-tai-du-an" title="ĐỀ TÀI, DỰ ÁN">ĐỀ TÀI, DỰ ÁN</a></li><li>    <a href="/vn/sinh-vien-nckh" title="SINH VIÊN NCKH">SINH VIÊN NCKH</a></li><li>    <a href="/vn/tin-khcn" title="TIN KHCN">TIN KHCN</a></li></ul>    </li><li>        <a href="/vn/thu-vien-anh" title="THƯ VIỆN ẢNH">THƯ VIỆN ẢNH</a>    </li><li class="hidden-md hidden-sm hidden-lg"><a href="/vn" style=" padding-top: 8px;"> <img src="https://sict.haui.edu.vn/dnn/web/haui/images/vn.png" alt="Tiếng Việt" title="Tiếng Việt"></a></li>                        <li class="hidden-md hidden-sm hidden-lg"><a href="/en" style=" padding-top: 8px;"> <img src="https://sict.haui.edu.vn/dnn/web/haui/images/en.png" alt="Tiếng Anh" title="Tiếng Anh"> </a></li> </ul>
+                                        
+                                    </div>
+                                    <!-- /.navbar-collapse -->
+                                </div>
+                                <!-- /.container-fluid -->
+                            </nav>
+                    </div>
+                </div>
+            </div>
+        </div><div style="display: block; width: 271px; height: 127.734px; float: none;"></div>
+    </header>
+    
+<section class="irs-main-slider">
+            <div id="myCarousel0" class="carousel fade-carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                        <div class="item slides">
+                            <a href="" title="">
+                                <img src="https://sict.haui.edu.vn/media/2/ufi2231.png" alt="slide" width="100%" height="100%">
+                            </a>
+                        </div>
+                        <div class="item slides">
+                            <a href="" title="">
+                                <img src="https://sict.haui.edu.vn/media/2/ufi2235.jpg" alt="slide" width="100%" height="100%">
+                            </a>
+                        </div>
+                        <div class="item slides">
+                            <a href="" title="">
+                                <img src="https://sict.haui.edu.vn/media/2/ufi2234.jpg" alt="slide" width="100%" height="100%">
+                            </a>
+                        </div>
+                        <div class="item slides">
+                            <a href="" title="">
+                                <img src="https://sict.haui.edu.vn/media/2/ufi2226.jpg" alt="slide" width="100%" height="100%">
+                            </a>
+                        </div>
+                        <div class="item slides active">
+                            <a href="" title="">
+                                <img src="https://sict.haui.edu.vn/media/2/ufi2230.png" alt="slide" width="100%" height="100%">
+                            </a>
+                        </div>
+                </div>
+                <a class="left carousel-control hidden-xs" href="#myCarousel0" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left icofont icofont-circled-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control hidden-xs" href="#myCarousel0" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right icofont icofont-circled-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+</section>
+<section class="irs-blog-field">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 event-left">
+                <div class="col-md-12">
+                    <div class="irs-section-title title-icon">
+                        <h2>
+                            <i class="icofont icofont-rss-feed"></i>
+                            <a href="https://sict.haui.edu.vn/vn/tin-tuc">
+                                <span>Tin tức</span>
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                            <div class="irs-blog-single-col">
+                                <div class="irs-blog-col">
+                                    <div id="index-img">
+                                        <a href="/vn/tin-tuc/sict-va-srv-tiep-tuc-chap-canh-tuong-lai-cho-sinh-vien-cong-nghe-thong-tin-va-truyen-thong-nam-2025/71346" title="SICT và SRV: Tiếp tục chắp cánh tương lai cho sinh viên Công nghệ thông tin và Truyền thông năm 2025">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80757.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class=" ls-is-cached lazyloaded" src="https://sict.haui.edu.vn/media/80/t80757.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="irs-courses-content">
+                                        <h4>
+                                            <a href="/vn/tin-tuc/sict-va-srv-tiep-tuc-chap-canh-tuong-lai-cho-sinh-vien-cong-nghe-thong-tin-va-truyen-thong-nam-2025/71346" title="SICT và SRV: Tiếp tục chắp cánh tương lai cho sinh viên Công nghệ thông tin và Truyền thông năm 2025">SICT và SRV: Tiếp tục chắp cánh tương lai cho sinh viên Công nghệ thông tin và Truyền thông năm 2025</a>
+                                        </h4>
+                                        <div class="line-clamp" style="overflow:hidden;">
+                                            <p>
+                                                Trong nhiều năm qua, Trường Công nghệ thông tin và Truyền thông (SICT) – Đại học Công nghiệp Hà Nội luôn duy trì mối quan hệ hợp tác chiến lược với Trung tâm Nghiên cứu và Phát triển Samsung Việt Nam (SRV). Nhiều chương trình học bổng, thực tập, đào tạo kỹ năng lập trình và hướng nghiệp đã được triển khai thành công, góp phần tạo điều kiện cho sinh viên tiếp cận môi trường học tập và làm việc chuyên nghiệp ngay từ khi còn ngồi trên ghế nhà trường.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="irs-blog-single-col">
+                        <div class="irs-side-bar">
+                            <div class="irs-post">
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/tin-tuc/ky-niem-50-nam-ngay-giai-phong-mien-nam-thong-nhat-dat-nuoc-30-4-1975-30-4-2025/71345" title="Kỷ niệm 50 năm ngày giải phóng miền Nam, thống nhất Đất Nước (30/4/1975 – 30/4/2025)">
+                                                <img data-src="https://sict.haui.edu.vn/media/80/t80746.jpg" alt="Kỷ niệm 50 năm ngày giải phóng miền Nam, thống nhất Đất Nước (30/4/1975 – 30/4/2025)" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class=" ls-is-cached lazyloaded" src="https://sict.haui.edu.vn/media/80/t80746.jpg">
+                                            </a>
+                                            <a href="/vn/tin-tuc/ky-niem-50-nam-ngay-giai-phong-mien-nam-thong-nhat-dat-nuoc-30-4-1975-30-4-2025/71345" title="Kỷ niệm 50 năm ngày giải phóng miền Nam, thống nhất Đất Nước (30/4/1975 – 30/4/2025)">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Kỷ niệm 50 năm ngày giải phóng miền Nam, thống nhất Đất Nước (30/4/1975 – 30/4/2025)</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/tin-tuc/bao-ve-de-an-thac-si-nganh-he-thong-thong-tin-k13-2-dot-1/71344" title="Bảo vệ đề án thạc sĩ ngành Hệ thống thông tin K13.2 đợt 1">
+                                                <img data-src="https://sict.haui.edu.vn/media/80/t80733.jpg" alt="Bảo vệ đề án thạc sĩ ngành Hệ thống thông tin K13.2 đợt 1" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class=" ls-is-cached lazyloaded" src="https://sict.haui.edu.vn/media/80/t80733.jpg">
+                                            </a>
+                                            <a href="/vn/tin-tuc/bao-ve-de-an-thac-si-nganh-he-thong-thong-tin-k13-2-dot-1/71344" title="Bảo vệ đề án thạc sĩ ngành Hệ thống thông tin K13.2 đợt 1">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Bảo vệ đề án thạc sĩ ngành Hệ thống thông tin K13.2 đợt 1</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/tin-tuc/hanh-trinh-nghe-thuat-thieng-lieng-to-quoc-toi-chua-dep-the-bao-gio-ban-hung-ca-tu-hao-cua-mot-dan-toc-vuon-minh-vang-vong-dem-thu-do/71339" title="Hành trình nghệ thuật thiêng liêng &quot;Tổ Quốc tôi chưa đẹp thế bao giờ&quot;: Bản hùng ca tự hào của một dân tộc vươn mình, vang vọng đêm Thủ đô">
+                                                <img data-src="https://sict.haui.edu.vn/media/80/t80692.jpg" alt="Hành trình nghệ thuật thiêng liêng &quot;Tổ Quốc tôi chưa đẹp thế bao giờ&quot;: Bản hùng ca tự hào của một dân tộc vươn mình, vang vọng đêm Thủ đô" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class=" ls-is-cached lazyloaded" src="https://sict.haui.edu.vn/media/80/t80692.jpg">
+                                            </a>
+                                            <a href="/vn/tin-tuc/hanh-trinh-nghe-thuat-thieng-lieng-to-quoc-toi-chua-dep-the-bao-gio-ban-hung-ca-tu-hao-cua-mot-dan-toc-vuon-minh-vang-vong-dem-thu-do/71339" title="Hành trình nghệ thuật thiêng liêng &quot;Tổ Quốc tôi chưa đẹp thế bao giờ&quot;: Bản hùng ca tự hào của một dân tộc vươn mình, vang vọng đêm Thủ đô">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Hành trình nghệ thuật thiêng liêng "Tổ Quốc tôi chưa đẹp thế bao giờ": Bản hùng ca tự hào của một dân tộc vươn mình, vang vọng đêm Thủ đô</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/tin-tuc/giao-luu-cung-doanh-nghiep-sinh-vien-sict-gap-go-dai-dien-gameloft-viet-nam-khoi-nguon-cam-hung-nghe-nghiep/71337" title="Giao lưu cùng doanh nghiệp: Sinh viên SICT gặp gỡ đại diện Gameloft Việt Nam – Khơi nguồn cảm hứng nghề nghiệp">
+                                                <img data-src="https://sict.haui.edu.vn/media/80/t80668.jpg" alt="Giao lưu cùng doanh nghiệp: Sinh viên SICT gặp gỡ đại diện Gameloft Việt Nam – Khơi nguồn cảm hứng nghề nghiệp" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class=" ls-is-cached lazyloaded" src="https://sict.haui.edu.vn/media/80/t80668.jpg">
+                                            </a>
+                                            <a href="/vn/tin-tuc/giao-luu-cung-doanh-nghiep-sinh-vien-sict-gap-go-dai-dien-gameloft-viet-nam-khoi-nguon-cam-hung-nghe-nghiep/71337" title="Giao lưu cùng doanh nghiệp: Sinh viên SICT gặp gỡ đại diện Gameloft Việt Nam – Khơi nguồn cảm hứng nghề nghiệp">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Giao lưu cùng doanh nghiệp: Sinh viên SICT gặp gỡ đại diện Gameloft Việt Nam – Khơi nguồn cảm hứng nghề nghiệp</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/tin-tuc/truong-sict-haui-mo-rong-hop-tac-quoc-te-voi-tap-doan-nic-nhat-ban-co-hoi-phat-trien-cho-sinh-vien-va-khang-dinh-vi-the-nha-truong/71336" title="Trường SICT - HaUI mở rộng hợp tác quốc tế với Tập đoàn NIC (Nhật Bản): Cơ hội phát triển cho sinh viên và khẳng định vị thế nhà trường">
+                                                <img data-src="https://sict.haui.edu.vn/media/80/t80659.jpg" alt="Trường SICT - HaUI mở rộng hợp tác quốc tế với Tập đoàn NIC (Nhật Bản): Cơ hội phát triển cho sinh viên và khẳng định vị thế nhà trường" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class=" ls-is-cached lazyloaded" src="https://sict.haui.edu.vn/media/80/t80659.jpg">
+                                            </a>
+                                            <a href="/vn/tin-tuc/truong-sict-haui-mo-rong-hop-tac-quoc-te-voi-tap-doan-nic-nhat-ban-co-hoi-phat-trien-cho-sinh-vien-va-khang-dinh-vi-the-nha-truong/71336" title="Trường SICT - HaUI mở rộng hợp tác quốc tế với Tập đoàn NIC (Nhật Bản): Cơ hội phát triển cho sinh viên và khẳng định vị thế nhà trường">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Trường SICT - HaUI mở rộng hợp tác quốc tế với Tập đoàn NIC (Nhật Bản): Cơ hội phát triển cho sinh viên và khẳng định vị thế nhà trường</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 event-hightlight">
+                <div class="event-title-highlight title-icon">
+                    <i class="icofont icofont-notification"></i>
+                    THÔNG BÁO
+                </div>
+
+                <ul>
+                        <li>
+                            <div class="irs-post-item" style="">
+                                <a style="width: 30%" href="/vn/thong-bao/to-chuc-cuoc-thi-giong-hat-hay-sinh-vien-the-voice-haui-2025/71348" title="Tổ chức cuộc thi Giọng hát hay sinh viên “The Voice HaUI 2025”">
+                                    <img alt="Tổ chức cuộc thi Giọng hát hay sinh viên “The Voice HaUI 2025”" class=" ls-is-cached lazyloaded" data-src="https://sict.haui.edu.vn/media/80/t80763.jpg" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" src="https://sict.haui.edu.vn/media/80/t80763.jpg">
+                                </a>
+                                <a style="width: 60%" href="/vn/thong-bao/to-chuc-cuoc-thi-giong-hat-hay-sinh-vien-the-voice-haui-2025/71348" title="Tổ chức cuộc thi Giọng hát hay sinh viên “The Voice HaUI 2025”">
+                                    <div class="event-title-module line-clamp">
+                                        <p class="limit-text" style="font-weight: bold; margin-top: 10px">
+                                            Tổ chức cuộc thi Giọng hát hay sinh viên “The Voice HaUI 2025”
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                            <li> <a href="/vn/thong-bao/tim-kiem-tai-nang-blockchain-layer-1-viet-nam-viet-chain-talents-2025/71347" title="Tìm kiếm Tài năng Blockchain Layer 1 Việt Nam: Việt Chain Talents 2025"><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>Tìm kiếm Tài năng Blockchain Layer 1 Việt Nam: Việt Chain Talents 2025</p></div></a></li>
+                            <li> <a href="/vn/thong-bao/ts-do-manh-hung-dien-gia-khach-moi-tai-hoi-thao-khoa-hoc-ve-ung-dung-ai-trong-giang-day-va-nghien-cuu/71326" title="TS. Đỗ Mạnh Hùng – Diễn giả khách mời tại Hội thảo khoa học về ứng dụng AI trong giảng dạy và nghiên cứu"><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>TS. Đỗ Mạnh Hùng – Diễn giả khách mời tại Hội thảo khoa học về ứng dụng AI trong giảng dạy và nghiên cứu</p></div></a></li>
+                </ul>
+                <a href="https://sict.haui.edu.vn/vn/thong-bao" class="pull-right" style="color:#0d4e96;">» Xem tất cả</a>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    <section class="irs-blog-field">
+        <div class="container">
+            <div class="row">
+<section class="irs-main-slider">
+
+</section>
+
+            </div>
+        </div>
+    </section>
+
+<section class="irs-blog-field">
+    <div class="container">
+        <div class="row animatedParent animateOnce gallery-box">
+
+            <div class="col-md-8 event-left auto-height">
+                <div class="col-md-12">
+                    <div class="irs-section-title title-icon">
+                        <h2>
+                            <i class="icofont icofont-graduate"></i>
+                            <a href="#">
+                                <span>CHUYÊN NGÀNH ĐÀO TẠO</span>
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-30 col-sm-6">
+                    <a href="/vn/html/cong-nghe-thong-tin" class="border ginormous">
+                        <div class="gallery-img">
+                            <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/majors/major-1.jpg" alt="Công nghệ thông tin" width="100%" height="100%" class="lazyload">
+                            <div class="album">
+                                <h2>Công nghệ thông tin</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-30 col-sm-6">
+                    <a href="/vn/html/khoa-hoc-may-tinh" class="border ginormous">
+                        <div class="gallery-img">
+                            <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/majors/major-2.jpg" alt="Khoa học máy tính" width="100%" height="100%" class="lazyload">
+                            <div class="album">
+                                <h2>Khoa học máy tính</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-30 col-sm-6">
+                    <a href="/vn/html/dai-hoc-he-thong-thong-tin" class="border ginormous">
+                        <div class="gallery-img">
+                            <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/majors/major-3.jpg" alt="Hệ thống thông tin" width="100%" height="100%" class="lazyload">
+                            <div class="album">
+                                <h2>Hệ thống thông tin</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-30 col-sm-6">
+                    <a href="/vn/html/ky-thuat-phan-mem" class="border ginormous">
+                        <div class="gallery-img">
+                            <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/majors/major-4.jpg" alt="Kỹ thuật phần mềm" width="100%" height="100%" class="lazyload">
+                            <div class="album">
+                                <h2>Kỹ thuật phần mềm</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-30 col-sm-6">
+                    <a href="/vn/html/an-toan-thong-tin" class="border ginormous">
+                        <div class="gallery-img">
+                            <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/majors/major-5.jpg" alt="An toàn thông tin" width="100%" height="100%" class="lazyload">
+                            <div class="album">
+                                <h2>An toàn thông tin</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-30 col-sm-6">
+                    <a href="/vn/html/cong-nghe-da-phuong-tien" class="border ginormous">
+                        <div class="gallery-img">
+                            <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/majors/major-6.jpg" alt="Công nghệ đa phương tiện" width="100%" height="100%" class="lazyload">
+                            <div class="album">
+                                <h2>Công nghệ đa phương tiện</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 event-hightlight">
+                <div class="event-title-highlight title-icon">
+                    <i class="icofont icofont-users"></i>
+                    TUYỂN DỤNG
+                </div>
+
+                    <ul>
+                            <li> <a href="/vn/tuyen-dung/co-hoi-vang-khoi-dau-su-nghiep-tai-tap-doan-toan-cau-ngay-hoi-tuyen-dung-canon-2025/71338" title="Cơ hội vàng khởi đầu sự nghiệp tại Tập đoàn toàn cầu - Ngày hội tuyển dụng CANON 2025"><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>Cơ hội vàng khởi đầu sự nghiệp tại Tập đoàn toàn cầu - Ngày hội tuyển dụng CANON 2025</p></div></a></li>
+                            <li> <a href="/vn/tuyen-dung/cong-ty-tnhh-gentherm-viet-nam-co-hoi-nghe-nghiep-hap-dan-tai-ha-nam/71324" title="Công ty TNHH GENTHERM VIỆT NAM – Cơ hội nghề nghiệp hấp dẫn tại Hà Nam!"><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>Công ty TNHH GENTHERM VIỆT NAM – Cơ hội nghề nghiệp hấp dẫn tại Hà Nam!</p></div></a></li>
+                            <li> <a href="/vn/tuyen-dung/tap-doan-khoa-hoc-ky-thuat-hong-hai-tuyen-dung/71316" title="Tập đoàn Khoa học kỹ thuật Hồng Hải tuyển dụng"><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>Tập đoàn Khoa học kỹ thuật Hồng Hải tuyển dụng</p></div></a></li>
+                            <li> <a href="/vn/tuyen-dung/leap-internship-chuong-trinh-thuc-tap-lon-nhat-nam-tai-gameloft-ha-noi/71265" title="LEAP Internship – chương trình thực tập lớn nhất năm tại Gameloft Hà Nội."><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>LEAP Internship – chương trình thực tập lớn nhất năm tại Gameloft Hà Nội.</p></div></a></li>
+                            <li> <a href="/vn/tuyen-dung/chuong-trinh-nuoi-duong-tai-nang-neweb-top10/71256" title="Chương trình nuôi dưỡng tài năng NEWEB TOP10."><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>Chương trình nuôi dưỡng tài năng NEWEB TOP10.</p></div></a></li>
+                    </ul>
+                <a href="https://sict.haui.edu.vn/vn/tuyen-dung" class="pull-right" style="color:#0d4e96;">» Xem tất cả</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="irs-blog-field" style="background: url(/dnn/web/haui/assets/images/bg/parallax3.jpg) 50% -54.0531px repeat scroll transparent; padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="irs-section-title title-icon">
+                        <h2>
+                        <i class="icofont icofont-chart-growth"></i>
+                            <a href="#">
+                                <span>ĐÀO TẠO NGẮN HẠN</span>
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="top-company-sec">
+                        <div class="row slick-initialized slick-slider" id="shortterm-carousel">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        <div aria-live="polite" class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 2810px; transform: translate3d(-281px, 0px, 0px);" role="listbox"><div class="col-md-4 slick-slide slick-cloned" style="width: 281px;" data-slick-index="-1" aria-hidden="true" tabindex="-1">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-python-cho-tre-tu-11-15-tuoi/71275" title="LẬP TRÌNH PYTHON CHO TRẺ TỪ 11-15 TUỔI" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80169.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-python-cho-tre-tu-11-15-tuoi/71275" title="LẬP TRÌNH PYTHON CHO TRẺ TỪ 11-15 TUỔI" tabindex="-1">LẬP TRÌNH PYTHON CHO TRẺ TỪ 11-15 TUỔI</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide slick-current slick-active" style="width: 281px;" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide20">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/xu-ly-anh-voi-photoshop-va-ai/71297" title="XỬ LÝ ẢNH VỚI PHOTOSHOP VÀ AI" tabindex="0">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80294.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/xu-ly-anh-voi-photoshop-va-ai/71297" title="XỬ LÝ ẢNH VỚI PHOTOSHOP VÀ AI" tabindex="0">XỬ LÝ ẢNH VỚI PHOTOSHOP VÀ AI</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="1" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide21">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/tri-tue-nhan-tao-ai-va-ung-dung/71296" title="TRÍ TUỆ NHÂN TẠO AI VÀ ỨNG DỤNG" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80291.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/tri-tue-nhan-tao-ai-va-ung-dung/71296" title="TRÍ TUỆ NHÂN TẠO AI VÀ ỨNG DỤNG" tabindex="-1">TRÍ TUỆ NHÂN TẠO AI VÀ ỨNG DỤNG</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide22">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/chuong-trinh-dao-tao-phan-tich-nghiep-vu-business-analysis/71295" title="CHƯƠNG TRÌNH ĐÀO TẠO PHÂN TÍCH NGHIỆP VỤ (BUSINESS ANALYSIS)" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80289.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/chuong-trinh-dao-tao-phan-tich-nghiep-vu-business-analysis/71295" title="CHƯƠNG TRÌNH ĐÀO TẠO PHÂN TÍCH NGHIỆP VỤ (BUSINESS ANALYSIS)" tabindex="-1">CHƯƠNG TRÌNH ĐÀO TẠO PHÂN TÍCH NGHIỆP VỤ (BUSINESS ANALYSIS)</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="3" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide23">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/chuong-trinh-phan-tich-du-lieu-data-analytics/71291" title="CHƯƠNG TRÌNH: PHÂN TÍCH DỮ LIỆU (DATA ANALYTICS)" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80272.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/chuong-trinh-phan-tich-du-lieu-data-analytics/71291" title="CHƯƠNG TRÌNH: PHÂN TÍCH DỮ LIỆU (DATA ANALYTICS)" tabindex="-1">CHƯƠNG TRÌNH: PHÂN TÍCH DỮ LIỆU (DATA ANALYTICS)</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="4" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide24">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/chuong-trinh-stem-robotics-cho-tre-tu-5-9-tuoi/71278" title="CHƯƠNG TRÌNH STEM ROBOTICS CHO TRẺ TỪ 5 - 9 TUỔI" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80175.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/chuong-trinh-stem-robotics-cho-tre-tu-5-9-tuoi/71278" title="CHƯƠNG TRÌNH STEM ROBOTICS CHO TRẺ TỪ 5 - 9 TUỔI" tabindex="-1">CHƯƠNG TRÌNH STEM ROBOTICS CHO TRẺ TỪ 5 - 9 TUỔI</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="5" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide25">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-pygame-cho-tre-tu-11-15-tuoi/71277" title="LẬP TRÌNH PYGAME CHO TRẺ TỪ 11-15 TUỔI" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80173.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-pygame-cho-tre-tu-11-15-tuoi/71277" title="LẬP TRÌNH PYGAME CHO TRẺ TỪ 11-15 TUỔI" tabindex="-1">LẬP TRÌNH PYGAME CHO TRẺ TỪ 11-15 TUỔI</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="6" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide26">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-scratch-cho-tre-tu-7-11-tuoi/71276" title="LẬP TRÌNH SCRATCH CHO TRẺ TỪ 7-11 TUỔI" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80171.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-scratch-cho-tre-tu-7-11-tuoi/71276" title="LẬP TRÌNH SCRATCH CHO TRẺ TỪ 7-11 TUỔI" tabindex="-1">LẬP TRÌNH SCRATCH CHO TRẺ TỪ 7-11 TUỔI</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="7" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide27">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-python-cho-tre-tu-11-15-tuoi/71275" title="LẬP TRÌNH PYTHON CHO TRẺ TỪ 11-15 TUỔI" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80169.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/lap-trinh-python-cho-tre-tu-11-15-tuoi/71275" title="LẬP TRÌNH PYTHON CHO TRẺ TỪ 11-15 TUỔI" tabindex="-1">LẬP TRÌNH PYTHON CHO TRẺ TỪ 11-15 TUỔI</a>
+                                    </p>
+                                </div>
+                            </div><div class="col-md-4 slick-slide slick-cloned" style="width: 281px;" data-slick-index="8" aria-hidden="true" tabindex="-1">
+                                <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                    <div class="irs-courses-img science-img">
+                                        <a href="/vn/dao-tao-ngan-han/xu-ly-anh-voi-photoshop-va-ai/71297" title="XỬ LÝ ẢNH VỚI PHOTOSHOP VÀ AI" tabindex="-1">
+                                            <img data-src="https://sict.haui.edu.vn/media/80/t80294.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="/vn/dao-tao-ngan-han/xu-ly-anh-voi-photoshop-va-ai/71297" title="XỬ LÝ ẢNH VỚI PHOTOSHOP VÀ AI" tabindex="-1">XỬ LÝ ẢNH VỚI PHOTOSHOP VÀ AI</a>
+                                    </p>
+                                </div>
+                            </div></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="irs-blog-field">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+            <div class="event-left">
+                <div class="col-md-12">
+                    <div class="irs-section-title title-icon">
+                        <h2>
+                            <i class="icofont icofont-group-students"></i>
+                            <a href="https://sict.haui.edu.vn/vn/cau-lac-bo">
+                                <span>Câu lạc bộ</span>
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="irs-blog-single-col">
+                            <div class="irs-blog-col">
+                                <div id="index-img">
+                                    <a href="/vn/cau-lac-bo/doi-olympic-tin-hoc/70796" title="Đội Olympic Tin học">
+                                        <img data-src="https://sict.haui.edu.vn/media/77/t77835.jpg" alt="notice" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                    </a>
+                                </div>
+                                <div class="irs-courses-content">
+                                    <h4>
+                                        <a href="/vn/cau-lac-bo/doi-olympic-tin-hoc/70796" title="Đội Olympic Tin học">Đội Olympic Tin học</a>
+                                    </h4>
+                                    <div class="line-clamp" style="overflow:hidden;">
+                                        <p>
+                                            
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="irs-blog-single-col">
+                        <div class="irs-side-bar">
+                            <div class="irs-post">
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-the-thao-dien-tu-truong-cong-nghe-thong-tin-va-truyen-thong-hec/70795" title="Câu lạc bộ Thể thao điện tử Trường Công nghệ thông tin và Truyền thông HEC">
+                                                <img data-src="https://sict.haui.edu.vn/media/77/t77820.jpg" alt="Câu lạc bộ Thể thao điện tử Trường Công nghệ thông tin và Truyền thông HEC" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                            </a>
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-the-thao-dien-tu-truong-cong-nghe-thong-tin-va-truyen-thong-hec/70795" title="Câu lạc bộ Thể thao điện tử Trường Công nghệ thông tin và Truyền thông HEC">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Câu lạc bộ Thể thao điện tử Trường Công nghệ thông tin và Truyền thông HEC</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-truyen-thong-truong-cong-nghe-thong-tin-va-truyen-thong-fit-media/67474" title="Câu lạc bộ Truyền thông Trường Công nghệ thông tin và Truyền thông FIT Media">
+                                                <img data-src="https://sict.haui.edu.vn/media/77/t77822.jpg" alt="Câu lạc bộ Truyền thông Trường Công nghệ thông tin và Truyền thông FIT Media" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                            </a>
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-truyen-thong-truong-cong-nghe-thong-tin-va-truyen-thong-fit-media/67474" title="Câu lạc bộ Truyền thông Trường Công nghệ thông tin và Truyền thông FIT Media">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Câu lạc bộ Truyền thông Trường Công nghệ thông tin và Truyền thông FIT Media</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-thanh-nien-tinh-nguyen-truong-cong-nghe-thong-tin-va-truyen-thong/67477" title="Câu lạc bộ thanh niên tình nguyện Trường Công nghệ thông tin và Truyền thông">
+                                                <img data-src="https://sict.haui.edu.vn/media/77/t77824.jpg" alt="Câu lạc bộ thanh niên tình nguyện Trường Công nghệ thông tin và Truyền thông" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                            </a>
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-thanh-nien-tinh-nguyen-truong-cong-nghe-thong-tin-va-truyen-thong/67477" title="Câu lạc bộ thanh niên tình nguyện Trường Công nghệ thông tin và Truyền thông">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Câu lạc bộ thanh niên tình nguyện Trường Công nghệ thông tin và Truyền thông</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-ho-tro-ky-thuat-truong-cong-nghe-thong-tin-va-truyen-thong-it-supporter-sict/67476" title="Câu lạc bộ Hỗ trợ kỹ thuật Trường Công nghệ thông tin và Truyền thông IT-Supporter SICT">
+                                                <img data-src="https://sict.haui.edu.vn/media/77/t77827.jpg" alt="Câu lạc bộ Hỗ trợ kỹ thuật Trường Công nghệ thông tin và Truyền thông IT-Supporter SICT" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                            </a>
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-ho-tro-ky-thuat-truong-cong-nghe-thong-tin-va-truyen-thong-it-supporter-sict/67476" title="Câu lạc bộ Hỗ trợ kỹ thuật Trường Công nghệ thông tin và Truyền thông IT-Supporter SICT">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Câu lạc bộ Hỗ trợ kỹ thuật Trường Công nghệ thông tin và Truyền thông IT-Supporter SICT</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="irs-post-item" style="padding-left: 110px;">
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-nghe-thuat-truong-cong-nghe-thong-tin-va-truyen-thong-istar/67475" title="Câu lạc bộ Nghệ thuật Trường Công nghệ thông tin và Truyền thông iStar">
+                                                <img data-src="https://sict.haui.edu.vn/media/77/t77829.jpg" alt="Câu lạc bộ Nghệ thuật Trường Công nghệ thông tin và Truyền thông iStar" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'" width="100%" height="100%" class="lazyload">
+                                            </a>
+                                            <a href="/vn/cau-lac-bo/cau-lac-bo-nghe-thuat-truong-cong-nghe-thong-tin-va-truyen-thong-istar/67475" title="Câu lạc bộ Nghệ thuật Trường Công nghệ thông tin và Truyền thông iStar">
+                                                <div class="event-title-module line-clamp">
+                                                    <p>Câu lạc bộ Nghệ thuật Trường Công nghệ thông tin và Truyền thông iStar</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <a href="https://sict.haui.edu.vn/vn/cau-lac-bo" class="btn btn-default irs-btn-transparent-two pull-right" style="margin-top:10px"> Xem thêm <i class="icofont icofont-arrow-right"></i></a>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="col-md-4 event-hightlight">
+                <div class="event-title-highlight title-icon">
+                    <i class="icofont icofont-unique-idea"></i>
+                    GƯƠNG SÁNG SINH VIÊN
+                </div>
+
+                    <ul>
+                            <li>
+                                <div class="irs-post-item" style="">
+                                    <a style="width: 30%" href="/vn/guong-sang/nguyen-khanh-trang-nu-lop-pho-nang-dong-gioi-hoc-gioi-the-thao-cua-nganh-cong-nghe-thong-tin/71327" title="Nguyễn Khánh Trang – Nữ lớp phó năng động, giỏi học, giỏi thể thao của ngành Công nghệ thông tin">
+                                        <img alt="Nguyễn Khánh Trang – Nữ lớp phó năng động, giỏi học, giỏi thể thao của ngành Công nghệ thông tin" class="lazyload" data-src="https://sict.haui.edu.vn/media/80/t80525.jpg" onerror="this.src='https://sict.haui.edu.vn/dnn/web/haui/assets/images/no-image.jpg'">
+                                    </a>
+                                    <a style="width: 60%" href="/vn/guong-sang/nguyen-khanh-trang-nu-lop-pho-nang-dong-gioi-hoc-gioi-the-thao-cua-nganh-cong-nghe-thong-tin/71327" title="Nguyễn Khánh Trang – Nữ lớp phó năng động, giỏi học, giỏi thể thao của ngành Công nghệ thông tin">
+                                        <div class="event-title-module line-clamp">
+                                            <p class="limit-text" style="font-weight: bold; margin-top: 10px">
+                                                Nguyễn Khánh Trang – Nữ lớp phó năng động, giỏi học, giỏi thể thao của ngành Công nghệ thông tin
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                                <li> <a href="/vn/guong-sang/sinh-vien-le-tran-gia-bao-guong-mat-tai-sac-ven-toan-cua-sict-vao-vong-chung-ket-miss-mister-haui-2025/71294" title="Sinh viên Lê Trần Gia Bảo – Gương mặt tài sắc vẹn toàn của SICT vào vòng chung kết “MISS &amp; MISTER HaUI 2025”"><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>Sinh viên Lê Trần Gia Bảo – Gương mặt tài sắc vẹn toàn của SICT vào vòng chung kết “MISS &amp; MISTER HaUI 2025”</p></div></a></li>
+                                <li> <a href="/vn/guong-sang/than-ngoc-thien-tam-guong-sinh-vien-tieu-bieu-trong-hoc-tap-va-cong-tac-doan-hoi/71243" title="Thân Ngọc Thiện - Tấm gương sinh viên tiêu biểu trong học tập và công tác Đoàn - Hội"><div class="event-title-module line-clamp"><p><span style="color:#0d4e96;">» </span>Thân Ngọc Thiện - Tấm gương sinh viên tiêu biểu trong học tập và công tác Đoàn - Hội</p></div></a></li>
+                    </ul>
+                <a href="https://sict.haui.edu.vn/vn/guong-sang" class="pull-right" style="color:#0d4e96;">» Xem tất cả</a>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="irs-blog-field" style="padding: 20px 0 0 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="top-company-sec">
+                    <div class="row slick-initialized slick-slider" id="companies-carousel">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    <div aria-live="polite" class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 5620px; transform: translate3d(-2529px, 0px, 0px);" role="listbox"><div class="col-lg-3 slick-slide slick-cloned" style="width: 281px;" data-slick-index="-1" aria-hidden="true" tabindex="-1">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn18.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="0" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide00">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/partner/pn1.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="1" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide01">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn2.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide02">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn3.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="3" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide03">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn4.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="4" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide04">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn5.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="5" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide05">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn6.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="6" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide06">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn7.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="7" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide07">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn8.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide slick-current slick-active" style="width: 281px;" data-slick-index="8" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide08">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn9.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="9" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide09">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn10.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="10" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide010">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn11.jpg" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="11" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide011">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn12.jpg" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="12" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide012">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn13.jpg" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="13" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide013">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn14.jpg" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="14" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide014">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn15.jpg" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="15" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide015">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn16.jpg" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="16" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide016">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn17.jpg" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide" style="width: 281px;" data-slick-index="17" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide017">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/Partner/pn18.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div><div class="col-lg-3 slick-slide slick-cloned" style="width: 281px;" data-slick-index="18" aria-hidden="true" tabindex="-1">
+                            <div class="top-compnay">
+                                <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo/partner/pn1.png" alt="Partner" class="lazyload">
+                            </div><!-- Top Partner -->
+                        </div></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="irs-blog-field">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="top-company-sec">
+                    <div class="row slick-initialized slick-slider" id="video-carousel">
+
+                        
+                        
+                        
+                    <div aria-live="polite" class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1405px; transform: translate3d(-843px, 0px, 0px);" role="listbox"><div class="col-md-4 slick-slide slick-cloned" style="width: 281px;" data-slick-index="-1" aria-hidden="true" tabindex="-1">
+                            <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                <div class="irs-courses-img science-img">
+                                    <a href="https://tv.haui.edu.vn/vn/clip-gioi-thieu/gioi-thieu-co-so-dao-tao-ha-nam-truong-dh-cong-nghiep-ha-noi/61849" title="CƠ SỞ HÀ NAM" tabindex="-1">
+                                        <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/video/vd2.webp" alt="CƠ SỞ HÀ NAM" width="100%" height="100%" class="lazyload">
+                                    </a>
+                                </div>
+                                <div class="irs-courses-content index-content-no-head">
+                                    <h3>
+                                        <a href="https://tv.haui.edu.vn/vn/clip-gioi-thieu/gioi-thieu-co-so-dao-tao-ha-nam-truong-dh-cong-nghiep-ha-noi/61849" title="Giới thiệu cơ sở đào tạo Hà Nam" tabindex="-1">CƠ SỞ 3</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="0" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide10">
+                            <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                <div class="irs-courses-img science-img">
+                                    <a href="//tv.haui.edu.vn/vn/tin-anh/gioi-thieu-co-so-1-dai-hoc-cong-nghiep-ha-noi/63497" title="CƠ SỞ 1" tabindex="-1">
+                                        <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/video/cs1.webp" alt="CƠ SỞ 1" width="100%" height="100%" class="lazyload">
+                                    </a>
+                                </div>
+                                <div class="irs-courses-content index-content-no-head">
+                                    <h3>
+                                        <a href="//tv.haui.edu.vn/vn/tin-anh/gioi-thieu-co-so-1-dai-hoc-cong-nghiep-ha-noi/63497" title="CƠ SỞ 1" tabindex="-1">CƠ SỞ 1</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div><div class="col-md-4 slick-slide" style="width: 281px;" data-slick-index="1" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide11">
+                            <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                <div class="irs-courses-img science-img">
+                                    <a href="//tv.haui.edu.vn/vn/tin-anh/gioi-thieu-co-so-2-dai-hoc-cong-nghiep-ha-noi/63496" title="CƠ SỞ 2" tabindex="-1">
+                                        <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/video/cs2.webp" alt="CƠ SỞ 2" width="100%" height="100%" class="lazyload">
+                                    </a>
+                                </div>
+                                <div class="irs-courses-content index-content-no-head">
+                                    <h3>
+                                        <a href="//tv.haui.edu.vn/vn/tin-anh/gioi-thieu-co-so-2-dai-hoc-cong-nghiep-ha-noi/63496" title="CƠ SỞ 2" tabindex="-1">CƠ SỞ 2</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div><div class="col-md-4 slick-slide slick-current slick-active" style="width: 281px;" data-slick-index="2" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide12">
+                            <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                <div class="irs-courses-img science-img">
+                                    <a href="https://tv.haui.edu.vn/vn/clip-gioi-thieu/gioi-thieu-co-so-dao-tao-ha-nam-truong-dh-cong-nghiep-ha-noi/61849" title="CƠ SỞ HÀ NAM" tabindex="0">
+                                        <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/video/vd2.webp" alt="CƠ SỞ HÀ NAM" width="100%" height="100%" class="lazyload">
+                                    </a>
+                                </div>
+                                <div class="irs-courses-content index-content-no-head">
+                                    <h3>
+                                        <a href="https://tv.haui.edu.vn/vn/clip-gioi-thieu/gioi-thieu-co-so-dao-tao-ha-nam-truong-dh-cong-nghiep-ha-noi/61849" title="Giới thiệu cơ sở đào tạo Hà Nam" tabindex="0">CƠ SỞ 3</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div><div class="col-md-4 slick-slide slick-cloned" style="width: 281px;" data-slick-index="3" aria-hidden="true" tabindex="-1">
+                            <div class="irs-courses-col irs-video-col animated fadeInLeftShort slow delay-250">
+                                <div class="irs-courses-img science-img">
+                                    <a href="//tv.haui.edu.vn/vn/tin-anh/gioi-thieu-co-so-1-dai-hoc-cong-nghiep-ha-noi/63497" title="CƠ SỞ 1" tabindex="-1">
+                                        <img data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/video/cs1.webp" alt="CƠ SỞ 1" width="100%" height="100%" class="lazyload">
+                                    </a>
+                                </div>
+                                <div class="irs-courses-content index-content-no-head">
+                                    <h3>
+                                        <a href="//tv.haui.edu.vn/vn/tin-anh/gioi-thieu-co-so-1-dai-hoc-cong-nghiep-ha-noi/63497" title="CƠ SỞ 1" tabindex="-1">CƠ SỞ 1</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+<!-- Footer start -->
+<footer class="irs-footer-field">
+    <div class="container">
+        <div class="row animatedParent animateOnce animateOnce">
+            <div class="col-md-2">
+                <div class="irs-footer-about">
+                    <a href="/vn">
+                        <img class="irs-foooter-logo lazyload" data-src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/logo.svg" alt="Trường Công nghệ thông tin và Truyền thông" width="100%" height="100%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="irs-footer-contact">
+                    <h4 class="irs-footer-heading">THÔNG TIN LIÊN HỆ</h4>
+                    <div class="irs-mailbox">
+                        <p>
+                            <i class="icofont icofont-google-map"></i> Tầng 12, Nhà A1
+                        </p>
+                        <p>
+                            <i class="icofont icofont-google-map"></i> Số 298 đường Cầu Diễn, quận Bắc Từ Liêm, Hà Nội
+                        </p>
+                        <p>
+                            <i class="icofont icofont-email"></i>Email: sict@haui.edu.vn
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="irs-footer-contact">
+                    <h4 class="irs-footer-heading">THÔNG TIN</h4>
+                    <div class="irs-mailbox">
+                        <ul>
+                            <li><a href="/vn/html/lien-he" style="color:white"><i class="iconfont icofont-thin-double-right"></i> Liên hệ</a></li>
+                            <li><a href="/vn/m/sitemap/module" style="color:white"><i class="iconfont icofont-thin-double-right"></i> Sơ đồ trang</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="irs-footer-contact">
+                    <h4 class="irs-footer-heading">MẠNG XÃ HỘI</h4>
+                    <div class="footer__social">
+                        <ul>
+                            <li><a href="#"><img src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/svg/facebook.svg" alt="Facebook"></a></li>
+                            <li><a href="#"><img src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/svg/youtube.svg" alt="Youtube"></a></li>
+                            <li><a href="#"><img src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/svg/messenger.svg" alt="Messenger"></a></li>
+                            <li><a href="#"><img src="https://sict.haui.edu.vn/dnn/web/haui/assets/images/svg/tiktok.svg" alt="Tiktok"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4 class="irs-footer-heading">BẢN ĐỒ CHỈ DẪN</h4>
+                <div class="irs-mailbox">
+                    <div class="irs-footer-contact">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.473663078486!2d105.73291811540255!3d21.053735992299995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345457e292d5bf%3A0x20ac91c94d74439a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1631076181348!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer end -->
+
+<section class="irs-copyright-field">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="irs-copyright">
+                    <p>
+                        Copyright © 2025 <a href="//www.haui.edu.vn" title="School of Information and Communications Technology" style="color: white;">School of Information and Communications Technology</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/bootstrap-dropdownhover.min.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/jquery-scrolltofixed-min.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/css3-animate-it.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/bootstrap-slider.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/jquery.scrollUp.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/classie.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/Interaction.js"></script>
+
+    <!-- Custom script for all pages -->
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/script.js"></script>
+    
+    <script type="text/javascript" src="https://sict.haui.edu.vn/dnn/web/haui/assets/js/slick.min.js"></script>
+    
+    <script type="text/javascript">
+        //window.onload = function () {
+        //    Particles.init({
+        //        selector: '.particles',
+        //        color: '#75A5B7',
+        //        maxParticles: 50,
+        //        connectParticles: false,
+        //        responsive: [
+        //            {
+        //                breakpoint: 768,
+        //                options: {
+        //                    maxParticles: 30
+        //                }
+        //            }, {
+        //                breakpoint: 375,
+        //                options: {
+        //                    maxParticles: 20
+        //                }
+        //            }
+        //        ]
+        //    });
+        //};
+        /*================== BG Slide Animation =====================*/
+        //$(".category").slick({
+        //    slidesToShow: 6,
+        //    slidesToScroll: 1,
+        //    arrows: true,
+        //    autoplay: true,
+        //    slide: 'div',
+        //    fade: false,
+        //    infinite: true,
+        //    dots: false,
+        //    responsive: [
+        //        {
+        //            breakpoint: 980,
+        //            settings: {
+        //                slidesToShow: 4,
+        //                slidesToScroll: 1,
+        //                infinite: true,
+        //                vertical: false,
+        //                centerMode: false,
+        //                centerPadding: '0px',
+        //                dots: false,
+        //                arrows: true
+        //            }
+        //        },
+        //        {
+        //            breakpoint: 767,
+        //            settings: {
+        //                slidesToShow: 2,
+        //                slidesToScroll: 1,
+        //                infinite: true,
+        //                vertical: false,
+        //                centerMode: false,
+        //                centerPadding: '0px',
+        //                dots: false,
+        //                arrows: false
+        //            }
+        //        },
+        //        {
+        //            breakpoint: 520,
+        //            settings: {
+        //                slidesToShow: 1,
+        //                slidesToScroll: 1,
+        //                infinite: true,
+        //                vertical: false,
+        //                centerMode: false,
+        //                centerPadding: '0px',
+        //                dots: false,
+        //                arrows: false
+        //            }
+        //        }
+        //    ]
+        //});
+
+        $("#companies-carousel").slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: true,
+            autoplay: true,
+            slide: 'div',
+            fade: false,
+            infinite: true,
+            dots: false,
+            responsive: [
+                {
+                    breakpoint: 980,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: true
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: true
+                    }
+                },
+                {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                }
+            ]
+        });
+
+        $("#video-carousel").slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: false,
+            autoplay: true,
+            slide: 'div',
+            fade: false,
+            infinite: true,
+            dots: false,
+            speed: 600,
+            responsive: [
+                {
+                    breakpoint: 980,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                }
+            ]
+        });
+
+        $("#media-carousel").slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: false,
+            autoplay: true,
+            slide: 'div',
+            fade: false,
+            infinite: true,
+            dots: false,
+            speed: 1000,
+            responsive: [
+                {
+                    breakpoint: 980,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                }
+            ]
+        });
+$("#shortterm-carousel").slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: false,
+            autoplay: true,
+            slide: 'div',
+            fade: false,
+            infinite: true,
+            dots: false,
+            speed: 1000,
+            responsive: [
+                {
+                    breakpoint: 980,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        vertical: false,
+                        centerMode: false,
+                        centerPadding: '0px',
+                        dots: false,
+                        arrows: false
+                    }
+                }
+            ]
+        });
+        $(document).ready(function ($) {
+            $('.start-count').each(function () {
+                var $this = $(this);
+                $this.data('target', parseInt($this.html()));
+                $this.data('counted', false);
+                $this.html('0');
+            });
+
+            $(window).bind('scroll', function () {
+                var speed = 3000;
+                $('.start-count').each(function () {
+                    var $this = $(this);
+                    if (!$this.data('counted') && $(window).scrollTop() + $(window).height() >= $this.offset().top) {
+                        $this.data('counted', true);
+                        $this.animate({
+                            dummy: 1
+                        }, {
+                                duration: speed,
+                                step: function (now) {
+                                    var $this = $(this);
+                                    var val = Math.round($this.data('target') * now);
+                                    $this.html(val);
+                                    if (0 < $this.parent('.value').length) {
+                                        $this.parent('.value').css('width', val + '%');
+                                    }
+                                }
+                            });
+                    }
+                });
+            }).triggerHandler('scroll');
+        });
+        var oiInteraction = new _interactionCore.init(1, 0, 0);
+    </script>
+
+    <!-- Funfact START -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-K7Z03WWXVP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-K7Z03WWXVP');
+    </script>
+
+
+<a id="scrollUp" href="#top" style="display: none; position: fixed; z-index: 2147483647;"></a></body></html>

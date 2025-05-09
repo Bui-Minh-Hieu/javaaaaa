@@ -1,0 +1,20 @@
+package com.sict.database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DatabaseConnection {
+    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=SICT_HAUI;encrypt=true;trustServerCertificate=true";
+    private static final String USER = "sa"; // Thay bằng username SQL Server của bạn
+    private static final String PASSWORD = "your_password"; // Thay bằng mật khẩu SQL Server của bạn
+
+    public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("SQL Server JDBC Driver not found", e);
+        }
+    }
+}

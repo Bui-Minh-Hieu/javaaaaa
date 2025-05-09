@@ -1,0 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SICT News</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .news-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .news-item {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .news-item h5 {
+            margin-bottom: 5px;
+        }
+        .news-item p {
+            margin-bottom: 5px;
+        }
+        .news-item small {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="news-header">
+            <h2>Tin tức</h2>
+        </div>
+
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger" role="alert">
+                ${error}
+            </div>
+        </c:if>
+
+        <c:forEach var="news" items="${newsList}">
+            <div class="news-item">
+                <h5>${news.title}</h5>
+                <p>${news.summary}</p>
+                <small>Ngày cập nhật: ${news.date}</small>
+            </div>
+        </c:forEach>
+    </div>
+
+    <!-- Bootstrap JS (optional, for interactive components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

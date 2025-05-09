@@ -1,0 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SICT News</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Chào mừng đến với SICT News</h1>
+    <a href="news?id=5">Xem tin tức mẫu</a>
+</body>
+</html>

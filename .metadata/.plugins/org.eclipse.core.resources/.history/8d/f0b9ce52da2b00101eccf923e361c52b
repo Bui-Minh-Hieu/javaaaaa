@@ -1,0 +1,5 @@
+package com.sict.db;
+
+public class DatabaseConnection {
+
+}

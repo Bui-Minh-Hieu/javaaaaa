@@ -1,0 +1,46 @@
+package com.sict.servlet;
+
+import com.sict.database.DatabaseConnection;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/news")
+public class NewsServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String tieuDe = "";
+        String trichDanTin = "";
+        String noiDungTin = "";
+        String ngayCapNhat = "";
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String sql = "SELECT TieuDeTinTuc, TrichDanTin, NoiDungTin, NgayCapNhat FROM TinTuc WHERE MaTinTuc = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                tieuDe = rs.getString("TieuDeTinTuc");
+                trichDanTin = rs.getString("TrichDanTin");
+                noiDungTin = rs.getString("NoiDungTin");
+                ngayCapNhat = rs.getTimestamp("NgayCapNhat").toString();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        request.setAttribute("tieuDe", tieuDe);
+        request.setAttribute("trichDanTin", trichDanTin);
+        request.setAttribute("noiDungTin", noiDungTin);
+        request.setAttribute("ngayCapNhat", ngayCapNhat);
+        request.getRequestDispatcher("/WEB-INF/tintuc.jsp").forward(request, response);
+    }
+}
