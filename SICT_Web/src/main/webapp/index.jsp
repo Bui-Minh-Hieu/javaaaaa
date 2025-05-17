@@ -1,0 +1,262 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .slideshow-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .slideshow-container img.slide {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+        .slideshow-container img.slide.active {
+            display: block;
+        }
+        .news-header, .club-header, .outstanding-student-header, .recent-news {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .news-header h4, .club-header h4, .outstanding-student-header h4, .recent-news h4 {
+            color: #003087;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .recent-news ul {
+            list-style: none;
+            padding: 0;
+        }
+        .recent-news ul li {
+            margin-bottom: 10px;
+        }
+        .recent-news ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        .recent-news ul li a:hover {
+            color: #003087;
+            text-decoration: underline;
+        }
+        .news-item, .club-item, .outstanding-student-item {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .news-item img, .club-item img, .outstanding-student-item img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .news-item .content, .club-item .content, .outstanding-student-item .content {
+            flex: 1;
+        }
+        .news-item .content h3, .club-item .content h3, .outstanding-student-item .content h3 {
+            font-size: 1.5em;
+            margin: 0 0 10px;
+        }
+        .news-item .content h3 a, .club-item .content h3 a, .outstanding-student-item .content h3 a {
+            color: #003087;
+            text-decoration: none;
+        }
+        .news-item .content h3 a:hover, .club-item .content h3 a:hover, .outstanding-student-item .content h3 a:hover {
+            text-decoration: underline;
+        }
+        .news-item .content .date, .club-item .content .date, .outstanding-student-item .content .date {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .news-item .content .summary, .club-item .content .summary, .outstanding-student-item .content .summary {
+            color: #333;
+            line-height: 1.6;
+        }
+        .news-header h1 a, .club-header h1 a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .news-header h1 a:hover, .club-header h1 a:hover {
+            text-decoration: underline;
+        }
+        .outstanding-student-header h4 a {
+            color: #003087;
+            text-decoration: none;
+        }
+        .outstanding-student-header h4 a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <%@ include file="header.jsp" %>
+
+    <div class="slideshow-container">
+        <img class="slide active" src="<%= request.getContextPath() %>/images/ufi2226.jpg" alt="Ảnh 1">
+        <img class="slide" src="<%= request.getContextPath() %>/images/ufi2234.jpg" alt="Ảnh 2">
+        <img class="slide" src="<%= request.getContextPath() %>/images/ufi2235.jpg" alt="Ảnh 3">
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- PHẦN SICT News và Câu lạc bộ (TRÁI) -->
+            <div class="col-md-6">
+                <!-- SICT News -->
+                <div class="news-header">
+                    <h1>
+                        <a href="tin-tuc" style="text-decoration: none; color: inherit;">Tin Tức</a>
+                    </h1>
+                    <c:forEach var="news" items="${newsList}">
+                        <div class="news-item">
+                            <c:if test="${not empty news.urlAnh}">
+                                <img src="${news.urlAnh}" alt="News Image">
+                            </c:if>
+                            <c:if test="${empty news.urlAnh}">
+                                <img src="https://via.placeholder.com/200x150" alt="Default Image">
+                            </c:if>
+                            <div class="content" style="color: #003399;">
+                                <h3>
+                                    <a href="xem-tin-tuc?matintuc=${news.maTinTuc}" style="text-decoration: none; color: inherit;">
+                                        ${news.tieuDeTinTuc}
+                                    </a>
+                                </h3>
+                                <div class="text-muted mb-2">
+                                    <fmt:parseDate value="${news.ngayCapNhat}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
+                                    <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </div>
+                                <div class="summary">${news.trichDanTin}</div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <c:if test="${not empty error}">
+                        <p class="text-danger">${error}</p>
+                    </c:if>
+                </div>
+
+                <!-- Câu lạc bộ -->
+                <div class="club-header mt-4">
+                    <h1>
+                        <a href="cau-lac-bo" style="text-decoration: none; color: inherit;">Câu lạc bộ</a>
+                    </h1>
+                    <c:forEach var="club" items="${clubList}">
+                        <div class="club-item">
+                            <c:if test="${not empty club.urlAnh}">
+                                <img src="${club.urlAnh}" alt="Club Image">
+                            </c:if>
+                            <c:if test="${empty club.urlAnh}">
+                                <img src="https://via.placeholder.com/200x150" alt="Default Image">
+                            </c:if>
+                            <div class="content" style="color: #003399;">
+                                <h3>
+                                    <a href="xem-cau-lac-bo?matintuc=${club.maTinTuc}" style="text-decoration: none; color: inherit;">
+                                        ${club.tieuDeTinTuc}
+                                    </a>
+                                </h3>
+                                <div class="text-muted mb-2">
+                                    <fmt:parseDate value="${club.ngayCapNhat}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
+                                    <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </div>
+                                <div class="summary">${club.trichDanTin}</div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <c:if test="${not empty error}">
+                        <p class="text-danger">${error}</p>
+                    </c:if>
+                </div>
+            </div>
+
+            <!-- PHẦN Thông báo và Gương sáng sinh viên (PHẢI) -->
+            <div class="col-md-6">
+                <div class="recent-news">
+                    <h4>Thông báo</h4>
+                    <ul>
+                        <c:forEach var="notification" items="${notificationList}">
+                            <li>
+                                <a href="xem-tin-tuc?matintuc=${notification.maTinTuc}">${notification.tieuDeTinTuc}</a>
+                            </li>
+                        </c:forEach>
+                        <c:if test="${empty notificationList}">
+                            <p class="text-danger">Không có thông báo nào để hiển thị.</p>
+                        </c:if>
+                    </ul>
+                </div>
+
+                <!-- Gương sáng sinh viên -->
+                <div class="outstanding-student-header mt-4">
+                    <h4>
+                        <a href="guong-sang-sv" style="text-decoration: none;">Gương sáng sinh viên</a>
+                    </h4>
+                    <c:forEach var="student" items="${studentList}">
+                        <div class="outstanding-student-item">
+                            <c:if test="${not empty student.urlAnh}">
+                                <img src="${student.urlAnh}" alt="Outstanding Student Image">
+                            </c:if>
+                            <c:if test="${empty student.urlAnh}">
+                                <img src="https://via.placeholder.com/200x150" alt="Default Image">
+                            </c:if>
+                            <div class="content" style="color: #003399;">
+                                <h3>
+                                    <a href="xem-guong-sang-sv?matintuc=${student.maTinTuc}" style="text-decoration: none; color: inherit;">
+                                        ${student.tieuDeTinTuc}
+                                    </a>
+                                </h3>
+                                <div class="text-muted mb-2">
+                                    <fmt:parseDate value="${student.ngayCapNhat}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate" />
+                                    <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </div>
+                                <div class="summary">${student.trichDanTin}</div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <c:if test="${not empty error}">
+                        <p class="text-danger">${error}</p>
+                    </c:if>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%@ include file="footer.jsp" %>
+
+    <script>
+        const slides = document.querySelectorAll('.slideshow-container .slide');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        showSlide(currentSlide);
+        setInterval(nextSlide, 5000);
+    </script>
+    <script src="<%= request.getContextPath() %>/script.js"></script>
+</body>
+</html>
