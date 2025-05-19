@@ -86,7 +86,7 @@ GO
 
 -- Table 6: Comments
 CREATE TABLE Comments (
-    CommentID INT IDENTITY(1,1) PRIMARY KEY,
+    MaBinhLuan INT IDENTITY(1,1) PRIMARY KEY,
     MaTinTuc INT NOT NULL,
     UserID INT NOT NULL,
     NoiDung NVARCHAR(MAX) NOT NULL,

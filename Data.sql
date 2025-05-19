@@ -610,3 +610,16 @@ GO
 
 
 select * from [Admin]
+
+SELECT * FROM Comments ORDER BY NgayBinhLuan DESC
+
+
+SELECT COUNT(*) FROM Comments
+
+SELECT c.MaBinhLuan, c.MaTinTuc, c.UserID, u.FullName, c.NoiDung, c.NgayBinhLuan, t.TieuDeTinTuc 
+FROM Comments c 
+JOIN Users u ON c.UserID = u.UserID 
+JOIN TinTuc t ON c.MaTinTuc = t.MaTinTuc 
+ORDER BY c.NgayBinhLuan DESC
+
+SELECT * FROM Comments WHERE MaTinTuc = 1;
