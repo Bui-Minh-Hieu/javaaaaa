@@ -28,40 +28,71 @@ public class XemCauLacBoServlet extends HttpServlet {
         TinTuc club = null;
         String maTinTuc = request.getParameter("matintuc");
 
+        Connection conn = null;
         if (maTinTuc == null || maTinTuc.trim().isEmpty()) {
             request.setAttribute("error", "Mã tin tức không hợp lệ.");
         } else {
-            try (Connection conn = DatabaseConnection.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(
-                         "SELECT MaTinTuc, TieuDeTinTuc, TrichDanTin, NoiDungTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag FROM TinTuc WHERE MaTinTuc = ? AND MaTheLoai = 15")) {
-                stmt.setInt(1, Integer.parseInt(maTinTuc));
-                ResultSet rs = stmt.executeQuery();
+            try {
+                conn = DatabaseConnection.getConnection();
+                conn.setAutoCommit(false);
 
-                if (rs.next()) {
-                    club = new TinTuc();
-                    club.setMaTinTuc(rs.getInt("MaTinTuc"));
-                    club.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
-                    club.setTrichDanTin(rs.getString("TrichDanTin"));
-                    String noiDungTin = rs.getString("NoiDungTin");
-                    if (noiDungTin != null) {
-                        noiDungTin = noiDungTin.replace("\n", "<br>");
-                    }
-                    club.setNoiDungTin(noiDungTin);
-                    Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
-                    if (timestamp != null) {
-                        club.setNgayCapNhat(timestamp.toLocalDateTime());
-                    }
-                    club.setUrlAnh(rs.getString("UrlAnh"));
-                    club.setSoLanDoc(rs.getInt("SoLanDoc"));
-                    club.setTag(rs.getString("Tag"));
-                } else {
-                    request.setAttribute("error", "Không tìm thấy câu lạc bộ với mã: " + maTinTuc);
+                // Cập nhật số lượt xem
+                String updateSql = "UPDATE TinTuc SET SoLanDoc = SoLanDoc + 1 WHERE MaTinTuc = ? AND MaTheLoai = 15";
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                    updateStmt.setInt(1, Integer.parseInt(maTinTuc));
+                    updateStmt.executeUpdate();
                 }
+
+                // Lấy dữ liệu sau khi cập nhật
+                String selectSql = "SELECT MaTinTuc, TieuDeTinTuc, TrichDanTin, NoiDungTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag FROM TinTuc WHERE MaTinTuc = ? AND MaTheLoai = 15";
+                try (PreparedStatement stmt = conn.prepareStatement(selectSql)) {
+                    stmt.setInt(1, Integer.parseInt(maTinTuc));
+                    ResultSet rs = stmt.executeQuery();
+
+                    if (rs.next()) {
+                        club = new TinTuc();
+                        club.setMaTinTuc(rs.getInt("MaTinTuc"));
+                        club.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                        club.setTrichDanTin(rs.getString("TrichDanTin"));
+                        String noiDungTin = rs.getString("NoiDungTin");
+                        if (noiDungTin != null) {
+                            noiDungTin = noiDungTin.replace("\n", "<br>");
+                        }
+                        club.setNoiDungTin(noiDungTin);
+                        Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                        if (timestamp != null) {
+                            club.setNgayCapNhat(timestamp.toLocalDateTime());
+                        }
+                        club.setUrlAnh(rs.getString("UrlAnh"));
+                        club.setSoLanDoc(rs.getInt("SoLanDoc"));
+                        club.setTag(rs.getString("Tag"));
+                    } else {
+                        request.setAttribute("error", "Không tìm thấy câu lạc bộ với mã: " + maTinTuc);
+                    }
+                }
+
+                conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
+                if (conn != null) {
+                    try {
+                        conn.rollback();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                 request.setAttribute("error", "Lỗi khi tải dữ liệu câu lạc bộ: " + e.getMessage());
             } catch (NumberFormatException e) {
                 request.setAttribute("error", "Mã tin tức không hợp lệ: " + maTinTuc);
+            } finally {
+                if (conn != null) {
+                    try {
+                        conn.setAutoCommit(true);
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
 

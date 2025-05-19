@@ -28,48 +28,78 @@ public class XemTuyenSinhDaiHocServlet extends HttpServlet {
         TinTuc news = null;
         String maTinTuc = request.getParameter("matintuc");
 
+        Connection conn = null;
         if (maTinTuc == null || maTinTuc.trim().isEmpty()) {
             request.setAttribute("error", "Mã tin tức không hợp lệ.");
         } else {
-            try (Connection conn = DatabaseConnection.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(
-                         "SELECT MaTinTuc, TieuDeTinTuc, TrichDanTin, NoiDungTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag " +
-                         "FROM TinTuc WHERE MaTinTuc = ? AND MaTheLoai = ? AND MaTheLoaiTin = ?")) {
-                stmt.setInt(1, Integer.parseInt(maTinTuc));
-                stmt.setInt(2, 5); // MaTheLoai = 5 (TUYỂN SINH)
-                stmt.setInt(3, 12); // MaTheLoaiTin = 12 (ĐẠI HỌC)
-                ResultSet rs = stmt.executeQuery();
+            try {
+                conn = DatabaseConnection.getConnection();
+                conn.setAutoCommit(false);
 
-                if (rs.next()) {
-                    news = new TinTuc();
-                    news.setMaTinTuc(rs.getInt("MaTinTuc"));
-                    news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
-                    String noiDungTin = rs.getString("NoiDungTin");
-                    if (noiDungTin != null) {
-                        String original = noiDungTin;
-                        // Replace literal "\n" with actual newline
-                        noiDungTin = noiDungTin.replace("\\n", "\n");
-                        // Replace actual newlines with <br> for HTML
-                        noiDungTin = noiDungTin.replaceAll("\r\n|\n|\r", "<br>");
-                        System.out.println("Original NoiDungTin: " + original);
-                        System.out.println("Processed NoiDungTin: " + noiDungTin);
-                    }
-                    news.setNoiDungTin(noiDungTin);
-                    Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
-                    if (timestamp != null) {
-                        news.setNgayCapNhat(timestamp.toLocalDateTime());
-                    }
-                    news.setUrlAnh(rs.getString("UrlAnh"));
-                    news.setSoLanDoc(rs.getInt("SoLanDoc"));
-                    news.setTag(rs.getString("Tag"));
-                } else {
-                    request.setAttribute("error", "Không tìm thấy tin tức với mã: " + maTinTuc);
+                // Cập nhật số lượt xem
+                String updateSql = "UPDATE TinTuc SET SoLanDoc = SoLanDoc + 1 WHERE MaTinTuc = ?";
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                    updateStmt.setInt(1, Integer.parseInt(maTinTuc));
+                    updateStmt.executeUpdate();
                 }
+
+                // Lấy dữ liệu sau khi cập nhật
+                String selectSql = "SELECT MaTinTuc, TieuDeTinTuc, TrichDanTin, NoiDungTin, NgayCapNhat, UrlAnh, SoLanDoc, Tag " +
+                                 "FROM TinTuc WHERE MaTinTuc = ? AND MaTheLoai = ? AND MaTheLoaiTin = ?";
+                try (PreparedStatement stmt = conn.prepareStatement(selectSql)) {
+                    stmt.setInt(1, Integer.parseInt(maTinTuc));
+                    stmt.setInt(2, 5); // MaTheLoai = 5 (TUYỂN SINH)
+                    stmt.setInt(3, 12); // MaTheLoaiTin = 12 (ĐẠI HỌC)
+                    ResultSet rs = stmt.executeQuery();
+
+                    if (rs.next()) {
+                        news = new TinTuc();
+                        news.setMaTinTuc(rs.getInt("MaTinTuc"));
+                        news.setTieuDeTinTuc(rs.getString("TieuDeTinTuc"));
+                        String trichDanTin = rs.getString("TrichDanTin");
+                        if (trichDanTin != null) {
+                            trichDanTin = trichDanTin.replace("\n", "<br>");
+                        }
+                        news.setTrichDanTin(trichDanTin);
+                        String noiDungTin = rs.getString("NoiDungTin");
+                        if (noiDungTin != null) {
+                            noiDungTin = noiDungTin.replace("\n", "<br>");
+                        }
+                        news.setNoiDungTin(noiDungTin);
+                        Timestamp timestamp = rs.getTimestamp("NgayCapNhat");
+                        if (timestamp != null) {
+                            news.setNgayCapNhat(timestamp.toLocalDateTime());
+                        }
+                        news.setUrlAnh(rs.getString("UrlAnh"));
+                        news.setSoLanDoc(rs.getInt("SoLanDoc"));
+                        news.setTag(rs.getString("Tag"));
+                    } else {
+                        request.setAttribute("error", "Không tìm thấy tin tức với mã: " + maTinTuc);
+                    }
+                }
+
+                conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
+                if (conn != null) {
+                    try {
+                        conn.rollback();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                 request.setAttribute("error", "Lỗi khi tải dữ liệu tin tức: " + e.getMessage());
             } catch (NumberFormatException e) {
                 request.setAttribute("error", "Mã tin tức không hợp lệ: " + maTinTuc);
+            } finally {
+                if (conn != null) {
+                    try {
+                        conn.setAutoCommit(true);
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
 

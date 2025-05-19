@@ -37,10 +37,6 @@
 <body>
     <%@ include file="header.jsp" %>
 
-    <div class="slideshow-container">
-        <img class="slide" src="<%= request.getContextPath() %>/images/anhtintuc.png" alt="Ảnh 1">
-    </div>
-
     <div class="container my-5">
         <div class="container-fluid">
             <div class="row">

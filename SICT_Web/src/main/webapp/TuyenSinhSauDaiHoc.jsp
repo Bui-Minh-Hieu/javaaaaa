@@ -63,10 +63,6 @@
 <body>
     <%@ include file="header.jsp" %>
 
-    <div class="slideshow-container">
-        <img class="slide" src="<%= request.getContextPath() %>/images/anhtintuc.png" alt="Ảnh 1">
-    </div>
-
     <div class="container my-4">
         <div class="container-fluid">
             <div class="row">
@@ -75,7 +71,6 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/trang-chu">Trang chủ</a></li>
-                                <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/tuyen-sinh-sau-dai-hoc">Tuyển Sinh Sau Đại Học</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
                             </ol>
                         </nav>

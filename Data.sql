@@ -53,6 +53,23 @@ VALUES
     (11, N'QUY CHẾ, BIỂU MẪU', 1, 0, 5, NULL, NULL, 0, 4);
 GO
 
+-- Step 1: Add new subcategories under ĐẠI HỌC (MaTheLoai = 4, MaTheLoaiTin = 7)
+INSERT INTO TheLoaiTin (MaTheLoaiTin, TenTheLoaiTin, VisibleTheLoaiTin, VisibleTheLoaiTin1, SapXep, Url, Target, LinkNgoai, MaTheLoai)
+VALUES
+    (25, N'KHOA HỌC MÁY TÍNH', 1, 0, 1, NULL, NULL, 0, 4),
+    (26, N'KỸ THUẬT PHẦN MỀM', 1, 0, 2, NULL, NULL, 0, 4),
+    (27, N'HỆ THỐNG THÔNG TIN', 1, 0, 3, NULL, NULL, 0, 4),
+    (28, N'CÔNG NGHỆ THÔNG TIN', 1, 0, 4, NULL, NULL, 0, 4),
+    (29, N'CÔNG NGHỆ ĐA PHƯƠNG TIỆN', 1, 0, 5, NULL, NULL, 0, 4),
+    (30, N'AN TOÀN THÔNG TIN', 1, 0, 6, NULL, NULL, 0, 4);
+GO
+
+-- Step 2: Add a subcategory under SAU ĐẠI HỌC (MaTheLoai = 4, MaTheLoaiTin = 8)
+INSERT INTO TheLoaiTin (MaTheLoaiTin, TenTheLoaiTin, VisibleTheLoaiTin, VisibleTheLoaiTin1, SapXep, Url, Target, LinkNgoai, MaTheLoai)
+VALUES
+    (31, N'HỆ THỐNG THÔNG TIN', 1, 0, 1, NULL, NULL, 0, 4);
+
+
 -- Subcategories for 'TUYỂN SINH' (MaTheLoai = 5)
 INSERT INTO TheLoaiTin (MaTheLoaiTin, TenTheLoaiTin, VisibleTheLoaiTin, VisibleTheLoaiTin1, SapXep, Url, Target, LinkNgoai, MaTheLoai)
 VALUES
@@ -447,3 +464,149 @@ GO
 -- Kiểm tra dữ liệu vừa chèn
 SELECT * FROM TinTuc WHERE MaTheLoai = 7;
 GO
+
+
+
+USE SICT_HAUI;
+GO
+
+-- Step 1: Add new subcategories under ĐẠI HỌC (MaTheLoai = 4, MaTheLoaiTin = 7)
+INSERT INTO TheLoaiTin (MaTheLoaiTin, TenTheLoaiTin, VisibleTheLoaiTin, VisibleTheLoaiTin1, SapXep, Url, Target, LinkNgoai, MaTheLoai)
+VALUES
+    (25, N'KHOA HỌC MÁY TÍNH', 1, 0, 1, NULL, NULL, 0, 4),
+    (26, N'KỸ THUẬT PHẦN MỀM', 1, 0, 2, NULL, NULL, 0, 4),
+    (27, N'HỆ THỐNG THÔNG TIN', 1, 0, 3, NULL, NULL, 0, 4),
+    (28, N'CÔNG NGHỆ THÔNG TIN', 1, 0, 4, NULL, NULL, 0, 4),
+    (29, N'CÔNG NGHỆ ĐA PHƯƠNG TIỆN', 1, 0, 5, NULL, NULL, 0, 4),
+    (30, N'AN TOÀN THÔNG TIN', 1, 0, 6, NULL, NULL, 0, 4);
+GO
+
+-- Step 2: Add a subcategory under SAU ĐẠI HỌC (MaTheLoai = 4, MaTheLoaiTin = 8)
+INSERT INTO TheLoaiTin (MaTheLoaiTin, TenTheLoaiTin, VisibleTheLoaiTin, VisibleTheLoaiTin1, SapXep, Url, Target, LinkNgoai, MaTheLoai)
+VALUES
+    (31, N'HỆ THỐNG THÔNG TIN', 1, 0, 1, NULL, NULL, 0, 4);
+GO
+
+-- Step 3: Delete incorrect data for MaTheLoai = 4
+DELETE FROM TinTuc WHERE MaTheLoai = 4;
+GO
+
+-- Step 4: Insert news entries for ĐẠI HỌC, SAU ĐẠI HỌC, and QUY CHẾ, BIỂU MẪU
+INSERT INTO TinTuc (MaTinTuc, TieuDeTinTuc, UrlAnh, TrichDanTin, NoiDungTin, NgayCapNhat, SoLanDoc, Tag, MaTheLoai, MaTheLoaiTin, MaPhanLoaiTin, MaThanhVien)
+VALUES 
+    -- KHOA HỌC MÁY TÍNH (MaTheLoaiTin = 25)
+    (80, N'Khoa Khoa học Máy tính', NULL, 
+     N'Giới thiệu về Khoa Khoa học Máy tính', 
+     N'**KHOA KHOA HỌC MÁY TÍNH**\n\n' +
+     N'Khoa Khoa học Máy tính thuộc Trường Công nghệ Thông tin và Truyền thông (SICT) chuyên đào tạo và nghiên cứu chuyên sâu về trí tuệ nhân tạo, học máy và phân tích dữ liệu.\n\n' +
+     N'- **Nghiên cứu nổi bật**:\n' +
+     N'  - Dẫn đầu trong các dự án AI và Big Data.\n' +
+     N'  - Phát triển các thuật toán học máy tiên tiến.\n\n' +
+     N'- **Đội ngũ giảng viên**: 40 giảng viên, 80% có công bố quốc tế.\n' +
+     N'- **Sinh viên**: Tham gia các cuộc thi lập trình quốc tế như ICPC, Hackathon.\n' +
+     N'- **Liên hệ**: Email: khoahocmaytinh@sict.haui.edu.vn | Điện thoại: (024) 5678 1234.', 
+     '2025-05-17 14:00:00', 0, N'AI,DuLieu', 4, 25, 1, 1),
+
+    -- KỸ THUẬT PHẦN MỀM (MaTheLoaiTin = 26)
+    (81, N'Khoa Kỹ thuật Phần mềm', NULL, 
+     N'Giới thiệu về Khoa Kỹ thuật Phần mềm', 
+     N'**KHOA KỸ THUẬT PHẦN MỀM**\n\n' +
+     N'Khoa Kỹ thuật Phần mềm tập trung đào tạo các kỹ năng phát triển phần mềm, quản lý dự án và kỹ thuật phần mềm theo tiêu chuẩn quốc tế.\n\n' +
+     N'- **Chương trình đào tạo**:\n' +
+     N'  - Đáp ứng tiêu chuẩn ACM/IEEE.\n' +
+     N'  - Tập trung vào quy trình phát triển phần mềm Agile, DevOps.\n\n' +
+     N'- **Cơ sở vật chất**: Phòng thực hành với các phần mềm hiện đại như Visual Studio, IntelliJ.\n' +
+     N'- **Hợp tác doanh nghiệp**: Liên kết với FPT, Viettel để cung cấp cơ hội thực tập.\n' +
+     N'- **Liên hệ**: Email: kythuatphanmem@sict.haui.edu.vn | Điện thoại: (024) 8765 4321.', 
+     '2025-05-17 14:00:00', 0, N'PhanMem,KyThuat', 4, 26, 1, 1),
+
+    -- HỆ THỐNG THÔNG TIN (MaTheLoaiTin = 27)
+    (82, N'Hệ thống Thông tin', NULL, 
+     N'Giới thiệu về chuyên ngành Hệ thống Thông tin', 
+     N'**HỆ THỐNG THÔNG TIN**\n\n' +
+     N'Chuyên ngành Hệ thống Thông tin tại Trường Công nghệ Thông tin và Truyền thông (SICT) đào tạo sinh viên về thiết kế, triển khai và quản lý các hệ thống thông tin doanh nghiệp.\n\n' +
+     N'- **Chương trình đào tạo**:\n' +
+     N'  - Tập trung vào ERP, CRM và các hệ thống quản lý dữ liệu.\n' +
+     N'  - Học về phân tích và thiết kế hệ thống.\n\n' +
+     N'- **Cơ hội việc làm**: Làm việc tại các công ty tư vấn CNTT như Deloitte, EY.\n' +
+     N'- **Thành tích sinh viên**: Nhiều sinh viên đạt giải trong các cuộc thi phân tích dữ liệu.\n' +
+     N'- **Liên hệ**: Email: hethongthongtin@sict.haui.edu.vn | Điện thoại: (024) 1234 5678.', 
+     '2025-05-17 14:00:00', 0, N'HeThong,DoanhNghiep', 4, 27, 1, 1),
+
+    -- CÔNG NGHỆ THÔNG TIN (MaTheLoaiTin = 28)
+    (83, N'Công nghệ Thông tin', NULL, 
+     N'Giới thiệu về chuyên ngành Công nghệ Thông tin', 
+     N'**CÔNG NGHỆ THÔNG TIN**\n\n' +
+     N'Chuyên ngành Công nghệ Thông tin tại Trường Công nghệ Thông tin và Truyền thông (SICT) cung cấp kiến thức toàn diện về lập trình, cơ sở dữ liệu và quản trị hệ thống.\n\n' +
+     N'- **Môn học tiêu biểu**:\n' +
+     N'  - Lập trình Java, Python.\n' +
+     N'  - Quản trị cơ sở dữ liệu với MySQL, Oracle.\n\n' +
+     N'- **Phòng thí nghiệm**: Trang bị máy tính cấu hình cao và phần mềm chuyên dụng.\n' +
+     N'- **Cơ hội nghề nghiệp**: Làm việc tại các tập đoàn công nghệ như Google, Microsoft.\n' +
+     N'- **Liên hệ**: Email: congnghethongtin@sict.haui.edu.vn | Điện thoại: (024) 5678 1234.', 
+     '2025-05-17 14:00:00', 0, N'LapTrinh,CoSoDuLieu', 4, 28, 1, 1),
+
+    -- CÔNG NGHỆ ĐA PHƯƠNG TIỆN (MaTheLoaiTin = 29)
+    (84, N'Công nghệ Đa phương tiện', NULL, 
+     N'Giới thiệu về chuyên ngành Công nghệ Đa phương tiện', 
+     N'**CÔNG NGHỆ ĐA PHƯƠNG TIỆN**\n\n' +
+     N'Chuyên ngành Công nghệ Đa phương tiện tại Trường Công nghệ Thông tin và Truyền thông (SICT) đào tạo về thiết kế đồ họa, sản xuất video và phát triển game.\n\n' +
+     N'- **Kỹ năng đào tạo**:\n' +
+     N'  - Sử dụng phần mềm Adobe Photoshop, Premiere.\n' +
+     N'  - Phát triển game với Unity, Unreal Engine.\n\n' +
+     N'- **Dự án sinh viên**: Thực hiện các sản phẩm truyền thông đa phương tiện cho doanh nghiệp.\n' +
+     N'- **Cơ hội nghề nghiệp**: Làm việc trong ngành truyền thông, game và quảng cáo.\n' +
+     N'- **Liên hệ**: Email: daphuongtien@sict.haui.edu.vn | Điện thoại: (024) 8765 4321.', 
+     '2025-05-17 14:00:00', 0, N'ThietKe,Game', 4, 29, 1, 1),
+
+    -- AN TOÀN THÔNG TIN (MaTheLoaiTin = 30)
+    (85, N'An toàn Thông tin', NULL, 
+     N'Giới thiệu về chuyên ngành An toàn Thông tin', 
+     N'**AN TOÀN THÔNG TIN**\n\n' +
+     N'Chuyên ngành An toàn Thông tin tại Trường Công nghệ Thông tin và Truyền thông (SICT) đào tạo về bảo mật mạng, mã hóa và phòng chống tấn công mạng.\n\n' +
+     N'- **Chương trình đào tạo**:\n' +
+     N'  - Học các chứng chỉ quốc tế như CEH, CISSP.\n' +
+     N'  - Thực hành tại phòng thí nghiệm an ninh mạng.\n\n' +
+     N'- **Thành tích**: Sinh viên đạt giải cao trong các cuộc thi an ninh mạng toàn quốc.\n' +
+     N'- **Cơ hội việc làm**: Làm việc tại các công ty bảo mật như Kaspersky, BKAV.\n' +
+     N'- **Liên hệ**: Email: antoanthongtin@sict.haui.edu.vn | Điện thoại: (024) 1234 5678.', 
+     '2025-05-17 14:00:00', 0, N'BaoMat,Mang', 4, 30, 1, 1),
+
+    -- SAU ĐẠI HỌC - HỆ THỐNG THÔNG TIN (MaTheLoaiTin = 31)
+    (86, N'Hệ thống Thông tin - Sau Đại học', NULL, 
+     N'Giới thiệu về chương trình Sau Đại học chuyên ngành Hệ thống Thông tin', 
+     N'**HỆ THỐNG THÔNG TIN - SAU ĐẠI HỌC**\n\n' +
+     N'Chương trình Sau Đại học chuyên ngành Hệ thống Thông tin tại Trường Công nghệ Thông tin và Truyền thông (SICT) tập trung vào nghiên cứu và ứng dụng các hệ thống thông tin trong doanh nghiệp.\n\n' +
+     N'- **Mục tiêu đào tạo**:\n' +
+     N'  - Phát triển chuyên gia trong lĩnh vực quản lý hệ thống thông tin.\n' +
+     N'  - Nâng cao kỹ năng nghiên cứu và phân tích dữ liệu.\n\n' +
+     N'- **Chương trình học**:\n' +
+     N'  - Quản lý dữ liệu lớn (Big Data).\n' +
+     N'  - Hệ thống ERP và CRM.\n\n' +
+     N'- **Cơ hội nghề nghiệp**: Làm việc tại các tập đoàn lớn như IBM, Oracle.\n' +
+     N'- **Liên hệ**: Email: sauhethongthongtin@sict.haui.edu.vn | Điện thoại: (024) 5678 1234.', 
+     '2025-05-17 14:00:00', 0, N'SauDaiHoc,HeThong', 4, 31, 1, 1),
+
+    -- QUY CHẾ, BIỂU MẪU (MaTheLoaiTin = 11)
+    (87, N'Quy Chế và Biểu Mẫu', NULL, 
+     N'Thông tin về quy chế và biểu mẫu đào tạo', 
+     N'**QUY CHẾ VÀ BIỂU MẪU**\n\n' +
+     N'Trường Công nghệ Thông tin và Truyền thông (SICT) cung cấp các quy chế và biểu mẫu cần thiết cho sinh viên và giảng viên trong quá trình đào tạo.\n\n' +
+     N'- **Quy chế đào tạo**:\n' +
+     N'  - Quy định về học tập và thi cử.\n' +
+     N'  - Quy chế xét tốt nghiệp và cấp bằng.\n\n' +
+     N'- **Biểu mẫu**:\n' +
+     N'  - Đơn xin nghỉ học.\n' +
+     N'  - Đơn xin chuyển ngành.\n' +
+     N'  - Đơn xin bảo lưu kết quả học tập.\n\n' +
+     N'- **Tải xuống**: Các biểu mẫu có thể được tải tại [website chính thức](https://sict.haui.edu.vn).\n' +
+     N'- **Liên hệ hỗ trợ**: Email: quyche@sict.haui.edu.vn | Điện thoại: (024) 1234 5678.', 
+     '2025-05-17 14:00:00', 0, N'QuyChe,BieuMau', 4, 11, 1, 1);
+GO
+
+-- Verify the inserted data
+SELECT * FROM TinTuc WHERE MaTheLoai = 4;
+GO
+
+
+select * from [Admin]

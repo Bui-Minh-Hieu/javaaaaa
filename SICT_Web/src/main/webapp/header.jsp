@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -115,24 +116,104 @@
             display: block;
         }
 
-        /* Logo */
+        /* Logo and Title */
         .logobar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             background-color: #f5f5f5;
+            position: relative;
+            min-height: 60px; /* Match logo height */
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
         }
 
         .logobar img {
             height: 60px;
             margin-right: 10px;
         }
+
+        .logobar h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #003366;
+            line-height: 60px; /* Align vertically with logo */
+        }
+
+        /* User login/logout */
+        .user-menu {
+            display: block; /* Hidden by default */
+            position: relative;
+        }
+
+        .logobar:hover .user-menu {
+            display: block; /* Show on hover over logobar */
+        }
+
+        .user-menu a, .user-menu .dropdown-toggle {
+            color: #003366;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .user-menu .btn-login {
+            background-color: #005599;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .user-menu:hover .dropdown-toggle {
+            background-color: #e0e0e0;
+        }
+
+        .user-menu .dropdown-menu {
+            min-width: 150px;
+            margin-top: 0;
+        }
+
+        .user-menu .dropdown-menu a {
+            color: #003366;
+            padding: 8px 15px;
+        }
+
+        .user-menu .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
     <div class="logobar">
-        <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo HaUI">
-        <h1>TRƯỜNG CÔNG NGHỆ THÔNG TIN</h1>
+        <div class="logo-title">
+            <img src="<%= request.getContextPath() %>/images/logo.png" alt="Logo HaUI">
+            <h1>TRƯỜNG CÔNG NGHỆ THÔNG TIN</h1>
+        </div>
+
+        <!-- User Login/Logout -->
+        <div class="user-menu">
+            <c:choose>
+                <c:when test="${not empty sessionScope.USER}">
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle me-1"></i><c:out value="${sessionScope.USER.fullName}"/>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="<%= request.getContextPath() %>/user/logout">Đăng xuất</a></li>
+                    </ul>
+                </c:when>
+                <c:otherwise>
+                    <a href="<%= request.getContextPath() %>/user/login" class="btn btn-sm btn-login">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập
+                    </a>
+                </c:otherwise>
+            </c:choose>
+        </div>
     </div>
 
     <div class="navbar-container">
@@ -155,22 +236,21 @@
                     <li>
                         <a href="#">ĐẠI HỌC</a>
                         <ul class="submenu">
-                            <li class="submenu-item"><a href="#">KHOA HỌC MÁY TÍNH</a></li>
-                            <li class="submenu-item"><a href="#">KỸ THUẬT PHẦN MỀM</a></li>
-                            <li class="submenu-item"><a href="#">HỆ THỐNG THÔNG TIN</a></li>
-                            <li class="submenu-item"><a href="#">CÔNG NGHỆ THÔNG TIN</a></li>
-                            <li class="submenu-item"><a href="#">CÔNG NGHỆ ĐA PHƯƠNG TIỆN</a></li>
-                            <li class="submenu-item"><a href="#">AN TOÀN THÔNG TIN</a></li>
+                            <li class="submenu-item"><a href="<%= request.getContextPath() %>/dao_tao?cat=khoa_hoc_may_tinh">KHOA HỌC MÁY TÍNH</a></li>
+                            <li class="submenu-item"><a href="<%= request.getContextPath() %>/dao_tao?cat=ky_thuat_phan_mem">KỸ THUẬT PHẦN MỀM</a></li>
+                            <li class="submenu-item"><a href="<%= request.getContextPath() %>/dao_tao?cat=he_thong_thong_tin">HỆ THỐNG THÔNG TIN</a></li>
+                            <li class="submenu-item"><a href="<%= request.getContextPath() %>/dao_tao?cat=cong_nghe_thong_tin">CÔNG NGHỆ THÔNG TIN</a></li>
+                            <li class="submenu-item"><a href="<%= request.getContextPath() %>/dao_tao?cat=cong_nghe_da_phuong_tien">CÔNG NGHỆ ĐA PHƯƠNG TIỆN</a></li>
+                            <li class="submenu-item"><a href="<%= request.getContextPath() %>/dao_tao?cat=an_toan_thong_tin">AN TOÀN THÔNG TIN</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">SAU ĐẠI HỌC</a>
                         <ul class="submenu">
-                            <li class="submenu-item"><a href="#">HỆ THỐNG THÔNG TIN</a></li>
+                            <li class="submenu-item"><a href="<%= request.getContextPath() %>/dao_tao?cat=sau_he_thong_thong_tin">HỆ THỐNG THÔNG TIN</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">KẾ HOẠCH</a></li>
-                    <li><a href="#">QUY CHẾ, BIỂU MẪU</a></li>
+                    <li><a href="<%= request.getContextPath() %>/dao_tao?cat=quy_che_bieu_mau">QUY CHẾ, BIỂU MẪU</a></li>
                 </ul>
             </li>
             <li>
@@ -199,5 +279,7 @@
             </li>
         </ul>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

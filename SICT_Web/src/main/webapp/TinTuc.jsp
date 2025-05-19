@@ -63,21 +63,23 @@
 <body>
     <%@ include file="header.jsp" %>
 
-    <div class="slideshow-container">
-        <img class="slide" src="<%= request.getContextPath() %>/images/anhtintuc.png" alt="Ảnh 1">
-    </div>
-
     <div class="container my-4">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="news-detail">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/trang-chu">Trang chủ</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
-                            </ol>
-                        </nav>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/trang-chu">Trang chủ</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+                                </ol>
+                            </nav>
+                            <form class="d-flex" action="tim-kiem" method="get">
+                                <input class="form-control me-2" type="search" placeholder="Tìm kiếm..." aria-label="Search" name="query">
+                                <button class="btn btn-outline-primary" type="submit">Tìm</button>
+                            </form>
+                        </div>
                         <c:if test="${not empty error}">
                             <div class="alert alert-danger" role="alert">
                                 ${error}

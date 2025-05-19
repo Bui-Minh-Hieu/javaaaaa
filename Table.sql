@@ -6,65 +6,77 @@ USE SICT_HAUI;
 GO
 
 -- Table 0: Admin
-CREATE TABLE Admin (
+CREATE TABLE [Admin] (
     AdminID INT IDENTITY(1,1) PRIMARY KEY,
-    Username VARCHAR(50) NOT NULL UNIQUE,
-    PasswordHash VARCHAR(255) NOT NULL,
-    FullName VARCHAR(100) NOT NULL,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    FullName NVARCHAR(100) NOT NULL,
     NgayDangKy DATETIME
 );
 GO
 
--- Table 1: TheLoai (Main categories)
-CREATE TABLE TheLoai (
-    MaTheLoai INT PRIMARY KEY, -- Assuming MaTheLoai is a unique identifier
-    TenTheLoai NVARCHAR(50) NOT NULL,
-    VisibleTheLoai BIT DEFAULT 0, -- 0: hidden, 1: visible on menu
-    VisibleTheLoai1 BIT DEFAULT 0, -- 0: hidden, 1: visible on data group
-    SapXep INT, -- Sorting order
-    Url VARCHAR(255), -- URL for redirection
-    Target VARCHAR(15), -- Window target (_blank, _self, etc.)
-    LinkNgoai BIT DEFAULT 0 -- 0: internal, 1: external link
+-- Table 1: Users (Readers)
+CREATE TABLE Users (
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    FullName NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    NgayDangKy DATETIME
 );
 GO
 
--- Table 2: TheLoaiTin (Subcategories)
+-- Table 2: TheLoai (Main categories)
+CREATE TABLE TheLoai (
+    MaTheLoai INT PRIMARY KEY,
+    TenTheLoai NVARCHAR(50) NOT NULL,
+    VisibleTheLoai BIT DEFAULT 0,
+    VisibleTheLoai1 BIT DEFAULT 0,
+    SapXep INT,
+    Url NVARCHAR(255),
+    Target NVARCHAR(15),
+    LinkNgoai BIT DEFAULT 0
+);
+GO
+
+-- Table 3: TheLoaiTin (Subcategories)
 CREATE TABLE TheLoaiTin (
-    MaTheLoaiTin INT PRIMARY KEY, -- Assuming MaTheLoaiTin is a unique identifier
+    MaTheLoaiTin INT PRIMARY KEY,
     TenTheLoaiTin NVARCHAR(50) NOT NULL,
-    VisibleTheLoaiTin BIT DEFAULT 0, -- 0: hidden, 1: visible on menu
-    VisibleTheLoaiTin1 BIT DEFAULT 0, -- 0: hidden, 1: visible on data group
-    SapXep INT, -- Sorting order
-    Url VARCHAR(255), -- URL for redirection
-    Target VARCHAR(15), -- Window target
-    LinkNgoai BIT DEFAULT 0, -- 0: internal, 1: external link
-    MaTheLoai INT, -- Foreign key to TheLoai
+    VisibleTheLoaiTin BIT DEFAULT 0,
+    VisibleTheLoaiTin1 BIT DEFAULT 0,
+    SapXep INT,
+    Url NVARCHAR(255),
+    Target NVARCHAR(15),
+    LinkNgoai BIT DEFAULT 0,
+    MaTheLoai INT,
     CONSTRAINT FK_TheLoaiTin_TheLoai FOREIGN KEY (MaTheLoai) REFERENCES TheLoai(MaTheLoai)
 );
 GO
 
--- Table 3: PhanLoaiTin
+-- Table 4: PhanLoaiTin
 CREATE TABLE PhanLoaiTin (
-    MaPhanLoaiTin INT PRIMARY KEY, -- Assuming MaPhanLoaiTin is a unique identifier
+    MaPhanLoaiTin INT PRIMARY KEY,
     TenPhanLoaiTin NVARCHAR(50) NOT NULL,
-    SapXep INT, -- Sorting order
+    SapXep INT,
     NgayCapNhat DATETIME
 );
 GO
--- Table 4: TinTuc
+
+-- Table 5: TinTuc
 CREATE TABLE TinTuc (
     MaTinTuc INT PRIMARY KEY,
     TieuDeTinTuc NVARCHAR(255) NOT NULL,
-    UrlAnh VARCHAR(100), 
-    TrichDanTin NVARCHAR(MAX), 
+    UrlAnh NVARCHAR(100),
+    TrichDanTin NVARCHAR(MAX),
     NoiDungTin NVARCHAR(MAX),
     NgayCapNhat DATETIME DEFAULT GETDATE(),
-    SoLanDoc INT, -- View count
-    Tag VARCHAR(255), -- Tags
-    MaTheLoai INT, -- Foreign key to TheLoai
-    MaTheLoaiTin INT, -- Foreign key to TheLoaiTin
-    MaPhanLoaiTin INT, -- Foreign key to PhanLoaiTin
-    MaThanhVien INT, -- Foreign key to Admin
+    SoLanDoc INT,
+    Tag NVARCHAR(255),
+    MaTheLoai INT,
+    MaTheLoaiTin INT,
+    MaPhanLoaiTin INT,
+    MaThanhVien INT,
     CONSTRAINT FK_TinTuc_TheLoai FOREIGN KEY (MaTheLoai) REFERENCES TheLoai(MaTheLoai),
     CONSTRAINT FK_TinTuc_TheLoaiTin FOREIGN KEY (MaTheLoaiTin) REFERENCES TheLoaiTin(MaTheLoaiTin),
     CONSTRAINT FK_TinTuc_PhanLoaiTin FOREIGN KEY (MaPhanLoaiTin) REFERENCES PhanLoaiTin(MaPhanLoaiTin),
@@ -72,24 +84,23 @@ CREATE TABLE TinTuc (
 );
 GO
 
--- Table 5: QuangCao
-CREATE TABLE QuangCao (
-    MaQuangCao INT PRIMARY KEY, -- Assuming MaQuangCao is a unique identifier
-    TieuDe NVARCHAR(255), -- Ad title
-    TinQuangCao VARCHAR(100), -- File path for ad (jpg, gif)
-    UrlQuangCao VARCHAR(255), -- Ad URL
-    Target VARCHAR(45), -- Window target
-    SapXep INT, -- Sorting order
-    VisibleQC BIT DEFAULT 0, -- 0: hidden, 1: visible
-    ViTri VARCHAR(45) -- Ad position
+-- Table 6: Comments
+CREATE TABLE Comments (
+    CommentID INT IDENTITY(1,1) PRIMARY KEY,
+    MaTinTuc INT NOT NULL,
+    UserID INT NOT NULL,
+    NoiDung NVARCHAR(MAX) NOT NULL,
+    NgayBinhLuan DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Comments_TinTuc FOREIGN KEY (MaTinTuc) REFERENCES TinTuc(MaTinTuc),
+    CONSTRAINT FK_Comments_Users FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 GO
 
--- Table 6: VideoClip
+-- Table 7: VideoClip
 CREATE TABLE VideoClip (
-    MaVideo INT PRIMARY KEY, -- Assuming MaVideo is a unique identifier
+    MaVideo INT PRIMARY KEY,
     TenVideo NVARCHAR(255) NOT NULL,
-    Url VARCHAR(255), -- Video URL
+    Url NVARCHAR(255),
     NgayCapNhat DATETIME
 );
 GO

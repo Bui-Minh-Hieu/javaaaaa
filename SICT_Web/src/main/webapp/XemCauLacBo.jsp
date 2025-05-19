@@ -34,10 +34,6 @@
 <body>
     <%@ include file="header.jsp" %>
 
-    <div class="slideshow-container">
-        <img class="slide" src="https://pbs.twimg.com/media/Gqpzy2-WEAA0cHY?format=jpg&name=900x900" alt="Ảnh 1">
-    </div>
-
     <div class="container my-5">
         <div class="container-fluid">
             <div class="row">
